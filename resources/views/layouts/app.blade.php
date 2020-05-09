@@ -107,6 +107,18 @@
                                 </div>
                             </li>
                         @endguest
+
+                        @if (config('locale.status') && count(config('locale.languages')) > 1)
+                            <li class="nav-item ">
+                                @foreach (array_keys(config('locale.languages')) as $lang)
+                                    @if ($lang != App::getLocale())
+                                        <a  class="nav-link" href="{!! route('lang.swap', $lang) !!}">
+                                            <img class="language" src="/assets/img/language/{!! $lang !!}.svg" alt="{!! $lang !!}">
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

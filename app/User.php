@@ -6,12 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasTranslations;
+    use HasRoles;
 
     public $translatable = ['description'];
 
@@ -49,6 +53,7 @@ class User extends Authenticatable
      */
     public function messages()
     {
+
         return $this->hasMany(Message::class);
     }
 

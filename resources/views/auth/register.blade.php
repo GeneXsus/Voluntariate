@@ -8,16 +8,18 @@
                 <div class="card">
                     <div class="card-header ">
                         <div class="nav nav-tabs card-header-tabs justify-content-center" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">User</a>
-                            <a class="nav-item nav-link" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">Company</a>
+                            <a class="nav-item nav-link active" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">{{ __('auth.user') }} </a>
+                            <a class="nav-item nav-link" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">{{ __('auth.company') }} </a>
                         </div>
 
                     </div>
                     <div class="card-body">
-                        <div class="card-title text-center"> <h1> {{ __('Register') }} </h1></div>
+
 
                         <div class="tab-content mt-3">
+
                             <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                                <div class="card-title text-center"> <h1> {{ __('auth.registerUser') }} </h1></div>
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
 
@@ -38,12 +40,12 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="name"
+                                        <label for="subname"
                                                class="col-md-4 col-form-label text-md-right">{{ __('Subname') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="name" type="text"
-                                                   class="form-control @error('subname') is-invalid @enderror" name="name"
+                                            <input id="subname" type="text"
+                                                   class="form-control @error('subname') is-invalid @enderror" name="subname"
                                                    value="{{ old('subname') }}" required autocomplete="subname" autofocus>
 
                                             @error('subname')
@@ -110,6 +112,7 @@
 
                             </div>
                             <div class="tab-pane fade" id="nav-company" role="tabpanel" aria-labelledby="nav-company-tab">
+                                <div class="card-title text-center"> <h1> {{ __('auth.registerCompany') }} </h1></div>
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
 

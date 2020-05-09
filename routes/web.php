@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/chat', 'ChatsController@index');
