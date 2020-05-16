@@ -9,9 +9,9 @@ class Offer extends Model
 {
     use HasTranslations;
 
-    public $translatable = ['name','description'];
+    public $translatable = ['name','description','description_short'];
 
-    protected $fillable = ['name','description','intDate','endDate','place','location'];
+    protected $fillable = ['name','description','description_short','init_date','end_date','places','location','center','user_id', 'type_id','closed'];
 
 
 
@@ -44,6 +44,9 @@ class Offer extends Model
         return $this->belongsToMany('App\User', 'registered', 'offer_id', 'user_id');
     }
 
+    public function path(){
+        return route('offers.show',$this);
+    }
 
     /**
      * Offer created by user

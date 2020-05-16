@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -39,7 +40,9 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
     }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -49,11 +52,37 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $validator=null;
+
+        switch ($data['type']){
+            case ('user'):
+                $validator=Validator::make($data, [
+                    'name' => ['required', 'string', 'max:50'],
+                    'subname' => ['required', 'string', 'max:150'],
+                    'location' => ['required', 'string', 'max:100'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+                break;
+            case ('company'):
+                $validator=Validator::make($data, [
+                    'center' => ['required', 'string', 'max:150'],
+                    'descriptionEs' => ['required'],
+                    'descriptionEn' => ['required'],
+                    'direction' => ['required'],
+                    'location' => ['required', 'string', 'max:100'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+                break;
+            default:
+
+                $validator=null;
+                break;
+        }
+
+
+        return $validator;
     }
 
     /**
@@ -64,10 +93,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user= null;
+        info('#en el create.');
+        switch ($data['type']) {
+            case ('user'):
+                $user = User::create([
+                    'name' => $data['name'],
+                    'subname' => $data['subname'],
+                    'location' => $data['location'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                ]);
+                $user->assignRole('User');
+                break;
+            case ('company'):
+
+
+                $user = User::create([
+                    'email' => $data['email'],
+                    'center' => $data['center'],
+                    'description' => [
+                        'en' => $data['descriptionEn'],
+                        'es' => $data['descriptionEs']
+                    ],
+                    'direction' => $data['direction'],
+
+                    'location' => $data['location'],
+                    'password' => Hash::make($data['password']),
+                ]);
+
+
+                $user->assignRole('Company');
+                break;
+        }
+
+
+        return $user;
     }
 }

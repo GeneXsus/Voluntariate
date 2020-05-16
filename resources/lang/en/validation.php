@@ -147,7 +147,18 @@ return [
     */
 
     'attributes' => [
-        'subname'=> 'last name'
+        'subname'=> 'last name',
+        'descriptionEs'=> 'Description (Spanish)',
+        'descriptionEn'=> 'Description (English)',
+        'descriptionShortEs'=> 'Description short (Spanish)',
+        'descriptionShortEn'=> 'Description short (English)',
+        'nameEs'=> "Name (Spanish)",
+        'nameEn'=> "Name (English)",
+        'location'=> "Province",
+        'places'=> "Places",
+        'init_date'=> "Init Date",
+        'end_date'=> "End Date"
+
 
     ],
 

@@ -17,9 +17,10 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->json('name');
             $table->json('description');
+            $table->json('description_short');
             $table->text('location');
-            $table->dateTime('init_date');
-            $table->dateTime('end_date');
+            $table->date('init_date');
+            $table->date('end_date');
             $table->integer('places');
             $table->boolean('closed')->default(false);
             $table->string('center',150);

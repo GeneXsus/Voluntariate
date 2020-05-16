@@ -146,6 +146,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'subname'=> 'Apellidos',
+        'descriptionEs'=> 'Descripción (Español)',
+        'descriptionEn'=> 'Descripción (Inglés)'
+    ],
 
 ];

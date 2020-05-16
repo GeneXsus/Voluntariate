@@ -27,7 +27,7 @@ class CreateRegisteredsTable extends Migration
                 ->cascadeOnDelete();
             $table->foreign('offer_id')
                 ->references('id')
-                ->on('OFFER')
+                ->on('offers')
                 ->cascadeOnDelete();
             $table->timestamps();
         });

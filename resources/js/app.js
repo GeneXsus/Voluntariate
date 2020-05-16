@@ -31,7 +31,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('chat-messages', require('./components/ChatMessages.vue').default);
 Vue.component('chat-form', require('./components/ChatForm.vue').default);
 
-const app = new Vue({
+/*const app = new Vue({
     el: '#app',
 
     data: {
@@ -65,4 +65,8 @@ const app = new Vue({
             });
         }
     }
-});
+});*/
+
+function delete(elementDel) {
+
+}

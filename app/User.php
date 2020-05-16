@@ -72,8 +72,8 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function registered(){
-        return $this->belongsToMany('App\Offer::Class', 'registered', 'user_id', 'offer_id');
+    public function registereds(){
+        return $this->belongsToMany(Offer::class, 'registereds', 'user_id', 'offer_id');
     }
 
 
@@ -82,7 +82,7 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function preferred(){
-        return $this->belongsToMany('App\Type::Class', 'preferred_types', 'user_id', 'type_id');
+        return $this->belongsToMany(Type::class, 'preferred_types', 'user_id', 'type_id');
 
     }
 
@@ -91,14 +91,14 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function ratings(){
-        return $this->HasMany('App\Rating::Class', 'rating_to', 'id');
+        return $this->HasMany(Rating::Class, 'rating_to', 'id');
     }
     /**
      * user Rated
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function rated(){
-        return $this->HasMany('App\Rating::Class', 'rating_by', 'id');
+        return $this->HasMany(Rating::Class, 'rating_by', 'id');
     }
 
 
