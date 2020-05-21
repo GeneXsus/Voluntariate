@@ -49,6 +49,7 @@
     "you have not registered in any offer": "no se ha registrado en ninguna oferta",
     "there are no open offers": "no hay ofertas abiertas",
     "there are no closed offers": "no hay ofertas cerradas",
+    "there are no ratings": "no hay valoraciones",
     "New Offer": "Nueva Oferta",
     "Unspecified": "Sin especificar",
     "Name (Spanish)": "Nombre (Español)",
@@ -65,7 +66,14 @@
     "Close": "Cerrar",
     "See": "Ver",
     "Edit":"Editar",
-    "Edit Offer": "Editar Oferta"
+    "Edit Offer": "Editar Oferta",
+    "Are you sure you want to delete it?": "¿Estás seguro de eliminarlo?",
+    "Are you sure you want to close it?": "¿Estás seguro de cerrarlo?",
+    "Are you sure you want to abrirlo it?": "¿Estás seguro de abrirlo?",
+    "Delete": "Eliminar",
+    "Cancel": "Cancelar",
+    "Unauthorized action": "Acción no autorizada",
+    "Edit Type": "Editar tipo"
 
 
 }

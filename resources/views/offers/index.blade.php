@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col-12 d-flex mb-3 justify-content-end">
-                <a class="btn  btn-outline-primary" href="{{route('offers.create')}}" role="button">{{__('New Offer')}}</a>
+                @can('create_offer')
+                    <a class="btn  btn-outline-primary" href="{{route('offers.create')}}" role="button">{{__('New Offer')}}</a>
+                @endcan
             </div>
         </div>
         <div class="row  justify-content-center">

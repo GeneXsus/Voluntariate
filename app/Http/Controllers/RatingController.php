@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
@@ -78,8 +79,20 @@ class RatingController extends Controller
      * @param  \App\Rating  $rating
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rating $rating)
+    public function destroy(Request $request)
     {
-        //
+        $rating=Rating::where('rating_by', '=', $request['userRated'])
+            ->where('rating_to', '=', $request['userRating'])
+            ->first();
+        $userAuth = Auth::user();
+        if( $rating && $userAuth && ($userAuth->can('delete_rating')||$userAuth->id==$rating->userRated->id)){
+
+            Rating::where('rating_by', '=', $rating->userRated->id)
+                ->where('rating_to', '=', $rating->userRating->id)
+                ->delete();
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

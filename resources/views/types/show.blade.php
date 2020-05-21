@@ -2,7 +2,7 @@
 
 @section ('content')
     <div id="wrapper">
-        <div id="page" class="container">
+        <div id="page" class="container-fluid">
             <div id="content">
                 <div class="title">
                     <h2>{{$offer->name}}</h2>

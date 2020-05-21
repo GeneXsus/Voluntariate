@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -26,21 +26,43 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
+
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'offers') === 0) ? 'active' : '' }}" href="{{route('offers.index') }}">
+                            {{ __('Manage Offers') }}
+                        </a>
+                    </li>
+                    @if(auth()->user()->can('create_type')|| auth()->user()->can('edit_type') || auth()->user()->can('delete_type'))
+                    <li class="nav-item">
+                        <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'types') === 0) ? 'active' : '' }}" href="{{route('types.index') }}">
+                            {{ __('Manage Types') }}
+                        </a>
+                    </li>
+                    @endif
+                    @can('admin')
+
+                        <li class="nav-item">
+                            <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'users') === 0) ? 'active' : '' }}" href="{{route('users.index') }}">
+                                {{ __('Manage User') }}
+                            </a>
+                        </li>
+                    @endcan
+                    <li class="nav-item dropdown slideToogle">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 
 
                             {{ Auth::user()->center? Auth::user()->center: Auth::user()->name.' '.Auth::user()->subname }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                            <a class="dropdown-item" href="{{route('offers.index') }}">
-                                {{ __('Manage Offers') }}
+                        <div class="dropdown-menu  dropdown-menu-right animated fadeInUp" aria-labelledby="navbarDropdown">
+                            @if(!Auth::user()->hasRole('Administrator'))
+                            <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'users.editSelf') == 0) ? 'active' : '' }}" href="{{route('users.editSelf',Auth::user()) }}">
+                                {{ __('Edit Profile') }}
                             </a>
+                            @endif
 
 
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item nav-link" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -51,6 +73,7 @@
                             </form>
                         </div>
                     </li>
+
                 @endguest
 
                 @if (config('locale.status') && count(config('locale.languages')) > 1)

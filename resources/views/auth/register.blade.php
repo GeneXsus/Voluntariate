@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -25,9 +25,7 @@
                                            value="user">
                                     <div class="form-group row">
                                         <label for="name-user" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-                                        <input id="name-user" type="hidden"
-                                               class="form-control" name="type"
-                                               value="user">
+
                                         <div class="col-md-6">
                                             <input id="name-user" type="text"
                                                    class="form-control @error('name') is-invalid @enderror" name="name"
@@ -72,6 +70,32 @@
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="description-es-user" class="col-md-4 col-form-label text-md-right">{{ __('Description (Spanish)') }}</label>
+
+                                        <div class="col-md-6">
+
+                                            <textarea class="form-control   @error('descriptionEs') is-invalid @enderror" name="descriptionEs"
+                                                      required autocomplete="descriptionEs" id="description-es-user" name="descriptionEs" rows="3">{{ old('descriptionEs') }}</textarea>
+                                            @error('descriptionEs')
+                                            <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="descriptionEn-user" class="col-md-4 col-form-label text-md-right">{{ __('Description (English)') }}</label>
+                                        <div class="col-md-6">
+                                            <textarea class="form-control   @error('descriptionEn') is-invalid @enderror" name="descriptionEn"
+                                                      required autocomplete="descriptionEn" id="descriptionEn-user" name="descriptionEn" rows="3">{{ old('descriptionEn') }}</textarea>
+                                            @error('descriptionEn')
+                                            <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                             @enderror
                                         </div>
                                     </div>

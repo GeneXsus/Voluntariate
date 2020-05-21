@@ -12,23 +12,23 @@ class Rating extends Model
     public $incrementing = false;
 
     /**
-     * User was do rating
+     * user was do rating
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function userRated()
     {
-        return $this->belongsTo('App\User::class', 'id', 'rating_by');
+        return $this->belongsTo(User::class, 'rating_by', 'id');
     }
 
     /**
-     * User was rated
+     * user was rated
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function userRating()
     {
-        return $this->belongsTo('App\User::class', 'id', 'rating_to');
+        return $this->belongsTo(User::class, 'rating_to', 'id');
     }
 
 }

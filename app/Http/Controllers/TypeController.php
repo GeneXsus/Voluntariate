@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -14,7 +15,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types= Type::all();
+        return view('types.index',["types"=>$types]);
     }
 
     /**
@@ -24,6 +26,14 @@ class TypeController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        if($user && $user->can('create_type')){
+            return view('types.create');
+
+        }else{
+
+            abort(403, 'Unauthorized action.');
+        }
         //
     }
 
@@ -35,19 +45,29 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        if( $user && $user->can('create_type')){
+            $this->validateType();
+            Type::create([
+                'name'=>[
+                    'en' => $request['nameEn'],
+                    'es' => $request['nameEs']
+                ],
+                'description' => [
+                    'en' => $request['descriptionEn'],
+                    'es' => $request['descriptionEs']
+                ],
+
+            ]);
+
+
+            return redirect(route('types.index'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Type  $type
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Type $type)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +77,13 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        $user = Auth::user();
+        if( $user && $user->can('edit_type')){
+
+            return view('types.edit',["type"=>$type]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -69,7 +95,24 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $user = Auth::user();
+        if( $user && $user->can('edit_type')){
+            $this->validateType();
+            $type->update([
+                'name'=>[
+                    'en' => $request['nameEn'],
+                    'es' => $request['nameEs']
+                ],
+                'description' => [
+                    'en' => $request['descriptionEn'],
+                    'es' => $request['descriptionEs']
+                ],
+            ]);
+
+            return redirect(route('types.index'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -80,6 +123,23 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $user = Auth::user();
+        if( $user && $user->can('delete_type')){
+            $type->delete();
+            return redirect(route('types.index'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    protected function validateType(){
+        return request()->validate([
+            'nameEs'=>['required'],
+            'nameEn'=>['required'],
+            'descriptionEs'=>'required',
+            'descriptionEn'=>'required',
+        ]);
+
     }
 }
+

@@ -1,17 +1,16 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex flex-wrap-reverse justify-content-end">
-            <h5 class="d-inline card-title w-auto mr-auto">{{ $type['name'] }} </h5>
+            <h5 class="d-inline card-title w-auto mr-auto">{{ $user['center']." | ".(Auth::user()->hasRole('Administrator')?$user['email']:'')}}  </h5>
         </div>
-
-
-        <p class="card-text">{{ $type['description'] }}</p>
-        @can('edit_type')
-        <a href="{{route("types.edit",$type)}}" class="btn btn-success">{{__("Edit")}}</a>
+        <p class="card-text">{{ $user['description'] }}</p>
+        <a href="{{route("users.show",$user)}}" class="btn btn-primary">{{__("See")}}</a>
+        @can('edit_user')
+        <a href="{{route("users.edit",$user)}}" class="btn btn-success">{{__("Edit")}}</a>
         @endcan
-        @can('delete_type')
+        @can('delete_user')
             <button class="btn btn-danger swalButton"
-                    data-form-send="delete-form-{{$type->id}}"
+                    data-form-send="delete-form-{{$user->id}}"
                     data-title-swal="{{__('Delete')}}"
                     data-text-swal="{{__('Are you sure you want to delete it?')}}"
                     data-type-swal="warning"
@@ -22,7 +21,7 @@
 
             </button>
 
-            <form id="delete-form-{{$type->id}}" action="{{ route('types.delete',$type) }}" method="POST" style="display: none;">
+            <form id="delete-form-{{$user->id}}" action="{{ route('users.delete',$user) }}" method="POST" style="display: none;">
                 @csrf
                 @method('DELETE')
             </form>

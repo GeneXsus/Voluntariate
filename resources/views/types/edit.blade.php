@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <div class="container">
+    <div class="container-fluid">
         @if ($errors->any())
             @foreach ($errors->all() as $error)
                 <div>{{$error}}</div>
@@ -20,9 +20,7 @@
                             <form method="POST" action="{{ route('types.update',['type' => $type])  }} ">
                                 @csrf
                                 @method('PUT')
-                                <input id="type-company" type="hidden"
-                                       class="form-control" name="type"
-                                       value="company">
+
 
                                 <div class="form-group row">
                                     <label for="nameEs"

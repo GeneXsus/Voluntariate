@@ -20,6 +20,9 @@ class OfferController extends Controller
     {
         $user = Auth::user();
         $values=[];
+        if(!$user){
+            abort(403, __("Unauthorized action."));
+        }
         if( $user->hasRole('User')){
             $offers_registered_open=$user->registereds->where('closed',0);
             $offers_registered_closed=$user->registereds->where('closed',1);
@@ -170,8 +173,14 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        $offer->delete();
-        return redirect(route('offers.index'));
+        $user = Auth::user();
+        if( $user && ($user['id']==$offer['user_id'] || $user->can('destroy_offer'))){
+            $offer->delete();
+            return redirect(route('offers.index'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+
     }
 
     protected function validateOffer(){

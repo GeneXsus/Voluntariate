@@ -16,7 +16,7 @@ class Offer extends Model
 
 
     /**
-     * User was created the offer
+     * user was created the offer
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

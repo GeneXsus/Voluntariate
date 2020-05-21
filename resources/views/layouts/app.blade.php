@@ -20,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+
     <style>
         .chat {
             list-style: none;
@@ -69,5 +70,43 @@
         </main>
         @include('layouts/footer')
     </div>
+<script src="https://unpkg.com/sweetalert2@7.3.0/dist/sweetalert2.all.js"></script>
+    <script type="text/javascript">
+        window.onload = function()  {
+            $( ".swalButton" ).on('click',function() {
+                event.preventDefault();
+                let formSend = $(this).attr('data-form-send');
+                let title = $(this).attr('data-title-swal');
+                let text = $(this).attr('data-text-swal');
+                let type = $(this).attr('data-type-swal');
+                let cancel = $(this).attr('data-cancel-swal');
+                let confirm = $(this).attr('data-confirm-swal');
+
+                swal({
+                    title: title,
+                    text: text,
+                    type: type,
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+
+                    cancelButtonText: cancel,
+                    confirmButtonText: confirm
+                }).then((result) => {
+                    if (result.value) {
+                        document.getElementById(formSend).submit();
+                    }
+                });
+            })
+            // Add fadeToggle animation to dropdown
+            $('.dropdown.slideToogle').on('show.bs.dropdown', function(e) {
+                $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(300);
+            });
+
+// Add fadeToggle animation to dropdown
+            $('.dropdown.slideToogle').on('hide.bs.dropdown', function(e) {
+                $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(300);
+            });
+        }
+    </script>
 </body>
 </html>

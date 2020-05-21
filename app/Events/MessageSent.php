@@ -19,7 +19,7 @@ class MessageSent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * User that sent the message
+     * user that sent the message
      *
      * @var User
      */
