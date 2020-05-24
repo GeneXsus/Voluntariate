@@ -56,7 +56,7 @@
 
                         <div class="dropdown-menu  dropdown-menu-right animated fadeInUp" aria-labelledby="navbarDropdown">
                             @if(!Auth::user()->hasRole('Administrator'))
-                            <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'users.editSelf') == 0) ? 'active' : '' }}" href="{{route('users.editSelf',Auth::user()) }}">
+                            <a class="dropdown-item nav-link {{ (Route::currentRouteName() =='users.editSelf') ? 'active' : '' }}" href="{{route('users.editSelf',Auth::user()) }}">
                                 {{ __('Edit Profile') }}
                             </a>
                             @endif

@@ -106,7 +106,19 @@
             $('.dropdown.slideToogle').on('hide.bs.dropdown', function(e) {
                 $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(300);
             });
+
+
+            $('.rating-form input').change(function () {
+                var $radio = $(this);
+                $('.rating-form .selected').removeClass('selected');
+                $radio.closest('label').addClass('selected');
+            });
+
         }
+
+
     </script>
+
+    @yield('scripts')
 </body>
 </html>

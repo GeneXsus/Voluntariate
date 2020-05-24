@@ -2,13 +2,15 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+    <div class="row d-flex justify-content-center">
+
 
         @foreach ($offers as $offer)
+                <div class="col-12 col-md-6 col-xl-4 mt-3 mb-3">
                 @include('layouts.card.offer')
+                </div>
         @endforeach
-        </div>
+
 
     </div>
 </div>

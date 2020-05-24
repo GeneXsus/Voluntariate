@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $offers=Offer::all();
+        $offers=Offer::all()->where('closed',0);
         return view('home', ['offers' => $offers]);
     }
 }

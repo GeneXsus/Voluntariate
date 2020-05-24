@@ -41,7 +41,7 @@ class Offer extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function registered(){
-        return $this->belongsToMany('App\User', 'registered', 'offer_id', 'user_id');
+        return $this->belongsToMany('App\User', 'registereds', 'offer_id', 'user_id');
     }
 
     public function path(){

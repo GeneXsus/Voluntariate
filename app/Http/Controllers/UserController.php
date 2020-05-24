@@ -33,9 +33,29 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $userAuth = Auth::user();
+        if($user->hasRole('Administrator') || !$userAuth ) {
+            abort(403, 'Unauthorized action.');
 
 
-        return view('users.show',["user"=>$user]);
+        }else{
+
+            $canRate = true;
+
+            if ($user->id == $userAuth->id) {
+                $canRate = false;
+            } else {
+                foreach ($user->ratings as $rating){
+                    if ($rating->rating_by== $userAuth->id){
+                        $canRate=false;
+                    }
+
+                }
+
+            }
+            return view('users.show', ["user" => $user, "canRate" => $canRate]);
+
+        }
     }
 
 
@@ -69,6 +89,75 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
+    {
+        $userAuth = Auth::user();
+        if( $userAuth && $userAuth->can('edit_user')){
+            if($user->hasRole('User')){
+                if($request['email'] && $request['email'] != $user->email )
+                {
+                $this->validateUser('unique:users');
+
+                }else{
+                    $this->validateUser('string');
+                }
+                $user->update([   'name' => $request['name'],
+                    'subname' => $request['subname'],
+                    'location' => $request['location'],
+                    'email' => $request['email']
+                ]);
+            }elseif ($user->hasRole('Company')){
+                if($request['email'] && $request['email'] != $user->email ){
+                $this->validateCompany('unique:users');
+
+                }else{
+                    $this->validateCompany('string');
+                }
+                $user->update([
+                    'email' => $request['email'],
+                    'center' => $request['center'],
+                    'description' => [
+                        'en' => $request['descriptionEn'],
+                        'es' => $request['descriptionEs']
+                    ],
+                    'direction' => $request['direction'],
+
+                    'location' => $request['location'],
+                ]);
+            }
+
+            return redirect(route('users.index'));
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function editSelf(User $user)
+    {
+        $userAuth = Auth::user();
+        if( $userAuth && $userAuth->can('edit_user')){
+
+            $json = File::get(public_path()."/assets/locations.json");
+            $locations = json_decode($json, true);
+            return view('users.edit', ['user' => $user, 'locations'=>$locations]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updateSelf(Request $request, User $user)
     {
         $userAuth = Auth::user();
         if( $userAuth && $userAuth->can('edit_user')){

@@ -49,7 +49,7 @@
     "you have not registered in any offer": "no se ha registrado en ninguna oferta",
     "there are no open offers": "no hay ofertas abiertas",
     "there are no closed offers": "no hay ofertas cerradas",
-    "there are no ratings": "no hay valoraciones",
+    "there is any rating": "no hay valoraciones",
     "New Offer": "Nueva Oferta",
     "Unspecified": "Sin especificar",
     "Name (Spanish)": "Nombre (Español)",
@@ -70,10 +70,27 @@
     "Are you sure you want to delete it?": "¿Estás seguro de eliminarlo?",
     "Are you sure you want to close it?": "¿Estás seguro de cerrarlo?",
     "Are you sure you want to abrirlo it?": "¿Estás seguro de abrirlo?",
+    "Are you sure you want to unsubscribe?": "¿Estás seguro de que quieres desuscribirte?",
+    "Are you sure you want to subscribe?": "¿Estás seguro de que quieres suscribirte?",
     "Delete": "Eliminar",
     "Cancel": "Cancelar",
     "Unauthorized action": "Acción no autorizada",
-    "Edit Type": "Editar tipo"
+    "Edit Type": "Editar tipo",
+    "Commentary": "Comentario",
+    "Rate": "Valoración",
+    "Write Rating": "Escribir Valoración",
+    "Public": "Publicar",
+    "Very Good": "Muy Buena",
+    "Good": "Buena",
+    "Average": "Regular",
+    "Poor": "Mala",
+    "Very Poor": "Muy Mala",
+    "Ratings": "Valoraciones",
+    "Usuario Ratings": "Valoraciones del usuario",
+    "SUBSCRIBE": "SUSCRIBIRSE",
+    "UNSUBSCRIBE": "DESUSCRIBIRSE"
+
+
 
 
 }

@@ -1,0 +1,37 @@
+.rating-form {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    width: 8em;
+}
+
+.rating-form input {
+    position: absolute;
+    left: -999999px;
+}
+
+.rating-form label {
+    display: inline-block;
+    font-size: 0;
+}
+
+.rating-form > label:before {
+    position: relative;
+    font: 24px/1 FontAwesome;
+    display: block;
+    content: "\f005";
+    color: #ccc;
+    background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rating-form > label:hover:before,
+.rating-form > label:hover ~ label:before,
+.rating-form > label.selected:before,
+.rating-form > label.selected ~ label:before {
+    color: #f0ad4e;
+    background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

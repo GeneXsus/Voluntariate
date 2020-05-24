@@ -1,8 +1,8 @@
-<div class="row  justify-content-center">
+<div class="row  justify-content-center mt-3 mb-3">
     <div class="col-12">
         <div class="card">
             <div class=" card-header justify-content-center" >
-                <h1 class="card-title text-center">{{__("Ratings")}}</h1>
+                <h2 class="card-title text-center">{{$ratingTitle}}</h2>
             </div>
 
 

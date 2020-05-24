@@ -1,5 +1,5 @@
-<div class="card">
-    <div class="card-body">
+<div class="card mt-3 mb-3">
+    <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-auto mr-auto">
                 {{$rating->userRated->hasRole('Company')? $rating->userRated->center: $rating->userRated->name." ".$rating->userRated->subname}}
@@ -13,7 +13,9 @@
         <p>
             {{$rating->description}}
         </p>
+
         @if(Auth::user()->can('delete_user') ||Auth::user()->id==$rating->userRated->id)
+            <div class="buttons-group ">
             <button class="btn btn-danger swalButton"
                     data-form-send="delete-form-{{$rating->userRated->id}}-{{$rating->userRating->id}}"
                     data-title-swal="{{__('Delete')}}"
@@ -30,27 +32,9 @@
                 @csrf
                 @method('DELETE')
             </form>
+            </div>
         @endcan
 
-{{--        <a href="{{route("rating.edit",$rating)}}" class="btn btn-success">{{__("Edit")}}</a>--}}
-
-
-{{--            <button class="btn btn-danger swalButton"--}}
-{{--                    data-form-send="delete-form-{{$rating['rating_by']}}-{{$rating['rating_to']}}"--}}
-{{--                    data-title-swal="{{__('Delete')}}"--}}
-{{--                    data-text-swal="{{__('Are you sure you want to delete it?')}}"--}}
-{{--                    data-type-swal="warning"--}}
-{{--                    data-confirm-swal="{{__('Delete')}}"--}}
-{{--                    data-cancel-swal="{{__('Cancel')}}"--}}
-{{--            >--}}
-{{--                {{ __('Delete') }}--}}
-
-{{--            </button>--}}
-
-{{--            <form id="delete-form-{{$rating['rating_by']}}-{{$rating['rating_to']}}" action="{{ route('rating.delete',$rating) }}" method="POST" style="display: none;">--}}
-{{--                @csrf--}}
-{{--                @method('DELETE')--}}
-{{--            </form>--}}
 
 
     </div>

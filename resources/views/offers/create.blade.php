@@ -18,9 +18,7 @@
                             <div class="card-title text-center"><h1> {{ __('New Offer') }} </h1></div>
                             <form method="POST" action="{{ route('offers.store') }}">
                                 @csrf
-                                <input id="type-company" type="hidden"
-                                       class="form-control" name="type"
-                                       value="company">
+
 
                                 <div class="form-group row">
                                     <label for="nameEs"

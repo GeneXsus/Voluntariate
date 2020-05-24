@@ -50,7 +50,10 @@ class OfferController extends Controller
 
     public function show(Offer $offer)
     {
-        return view('offers.show', ['offer' => $offer]);
+        $userAuth = Auth::user();
+
+        $isSubscribe= ($userAuth&& $userAuth->registereds()->where('offer_id',$offer->id)->first() != null)?true:false;
+        return view('offers.show', ['offer' => $offer,'isSubscribe'=>$isSubscribe]);
     }
 
     /**
@@ -151,7 +154,7 @@ class OfferController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  Close or open offer .
      *
      * @param \App\Offer $offer
      * @return \Illuminate\Http\Response
@@ -159,10 +162,52 @@ class OfferController extends Controller
     public function toogle(Offer $offer)
     {
 
+        $user = Auth::user();
+        if( $user &&  ($user->id== $offer['user_id'] ||  $user->hasRole('Administrator')))
+        {
+            $offer->update(['closed'=>($offer['closed']==0?1:0)]);
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
 
-        $offer->update(['closed'=>($offer['closed']==0?1:0)]);
-        return redirect()->back();
+    /**
+     *  Susbcribe user to offer.
+     *
+     * @param \App\Offer $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function subscribeUser(Offer $offer)
+    {
 
+        $user = Auth::user();
+        if( $user &&  ( !$user->hasRole(['Administrator', 'Company'])))
+        {
+            $offer->registered()->attach($user->id);
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    /**
+     *  Unusbcribe user to offer.
+     *
+     * @param \App\Offer $offer
+     * @return \Illuminate\Http\Response
+     */
+    public function unsubscribeUser(Offer $offer)
+    {
+
+        $user = Auth::user();
+        if( $user &&  (!$user->hasRole(['Administrator', 'Company'])))
+        {
+            $offer->registered()->detach($user->id);
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**

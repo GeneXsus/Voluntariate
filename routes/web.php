@@ -29,6 +29,8 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/offers/{offer}/edit', 'OfferController@edit')->name('offers.edit');
     Route::put('/offers/{offer}', 'OfferController@update')->name('offers.update');
     Route::post('/offers/{offer}/toogle', 'OfferController@toogle')->name('offers.toogle');
+    Route::post('/offers/{offer}/subscribe', 'OfferController@subscribeUser')->name('offers.subscribe');
+    Route::post('/offers/{offer}/unsubscribe', 'OfferController@unsubscribeUser')->name('offers.unsubscribe');
     Route::delete('/offers/{offer}', 'OfferController@destroy')->name('offers.delete');
 
     //type
@@ -52,9 +54,6 @@ Route::middleware(['verified'])->group(function () {
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.delete');
 
     Route::post('/ratings', 'RatingController@store')->name('ratings.store');
-    Route::get('/ratings/create', 'RatingController@create')->name('ratings.create');
-    Route::get('/ratings/{rating}/edit', 'RatingController@edit')->name('ratings.edit');
-    Route::put('/ratings/{rating}', 'RatingController@update')->name('ratings.update');
     Route::delete('/ratings', 'RatingController@destroy')->name('ratings.delete');
 
     Route::get('/chat', 'ChatsController@index');

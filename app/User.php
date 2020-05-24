@@ -93,6 +93,8 @@ class User extends Authenticatable
     public function ratings(){
         return $this->HasMany(Rating::Class, 'rating_to', 'id');
     }
+
+
     /**
      * user Rated
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -100,6 +102,32 @@ class User extends Authenticatable
     public function rated(){
         return $this->HasMany(Rating::Class, 'rating_by', 'id');
     }
+    /**
+     *  Value of Rating of a user
+     * @return integer
+     */
+
+    public function ratingsValue(){
+        $ratings=$this->ratings;
+        $countRating=$ratings->count();
+        if($countRating>0){
+            $ratingsValue=0;
+
+            foreach ($ratings as $rating){
+                $ratingsValue=$ratingsValue+$rating->rate;
+
+            }
+
+            $ratingsValue=$ratingsValue/$countRating;
+        }else{
+            $ratingsValue=-1;
+        }
+
+
+        return $ratingsValue;
+
+    }
+
 
 
 

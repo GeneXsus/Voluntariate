@@ -13926,7 +13926,87 @@ a.text-dark:focus {
   clip: auto;
 }
 
+.subscribe-button-container {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+}
+
 .language {
   width: 20px;
+}
+
+.rating-form {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  width: 8em;
+}
+
+.rating-form input {
+  position: absolute;
+  left: -999999px;
+}
+
+.rating-form label {
+  display: inline-block;
+  font-size: 0;
+}
+
+.rating-form > label:before {
+  position: relative;
+  font: 24px/1 FontAwesome;
+  display: block;
+  content: "\F005";
+  color: #ccc;
+  background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rating-form > label:hover:before,
+.rating-form > label:hover ~ label:before,
+.rating-form > label.selected:before,
+.rating-form > label.selected ~ label:before {
+  color: #f0ad4e;
+  background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-button {
+  position: relative;
+  padding-bottom: 50px;
+}
+
+@media (max-width: 767px) {
+  .card-button {
+    padding-bottom: 1.25rem;
+  }
+}
+
+.card-button .buttons-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 1.25rem;
+}
+
+.card-button .buttons-group .btn {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 767px) {
+  .card-button .buttons-group {
+    margin: 5px;
+    position: relative;
+    bottom: auto;
+    flex-wrap: wrap;
+  }
 }
 

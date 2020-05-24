@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Exception;
 class RatingController extends Controller
 {
     /**
@@ -19,16 +19,6 @@ class RatingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,42 +26,29 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        if( $user && $user->can('write_rating') && $user->id!=$request['id_user']){
+            $this->validateRating();
+            try {
+                Rating::create([
+                    'rating_by'=> $user['id'],
+                    'rating_to'=> $request['id_user'],
+                    'rate'=> $request['rate'],
+                    'description' =>  $request['description'],
+
+                ]);
+            }catch (Exception   $e){
+                abort(403, 'Unauthorized action.');
+            }
+
+
+
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Rating  $rating
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Rating  $rating
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rating  $rating
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Rating $rating)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -95,4 +72,13 @@ class RatingController extends Controller
             abort(403, 'Unauthorized action.');
         }
     }
+    protected function validateRating(){
+        return request()->validate([
+            'rate'=>['required'],
+            'description'=>['required'],
+
+        ]);
+
+    }
+
 }

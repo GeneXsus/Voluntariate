@@ -1,11 +1,12 @@
 <div class="card">
-    <div class="card-body">
+    <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-auto mr-auto">{{ $type['name'] }} </h5>
         </div>
 
 
         <p class="card-text">{{ $type['description'] }}</p>
+        <div class="buttons-group">
         @can('edit_type')
         <a href="{{route("types.edit",$type)}}" class="btn btn-success">{{__("Edit")}}</a>
         @endcan
@@ -27,6 +28,6 @@
                 @method('DELETE')
             </form>
         @endcan
-
+        </div>
     </div>
 </div>

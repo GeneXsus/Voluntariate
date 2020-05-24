@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     //
-    protected $fillable = ['description','rate'];
+    protected $fillable = ['rating_by', 'rating_to','description','rate'];
     protected $primaryKey = ['rating_by', 'rating_to'];
     public $incrementing = false;
 
