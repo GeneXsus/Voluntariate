@@ -3,7 +3,7 @@
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-auto mr-auto">{{ $user['center']." | ".(Auth::user()->hasRole('Administrator')?$user['email']:'')}}  </h5>
         </div>
-        <p class="card-text">{{ $user['description'] }}</p>
+
         <div class="buttons-group">
             <a href="{{route("users.show",$user)}}" class="btn btn-primary">{{__("See")}}</a>
             @can('edit_user')

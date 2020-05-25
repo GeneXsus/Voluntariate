@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
 
-                                    @elseif ($user->hasRole('User'))
+                                    @elseif ($user->hasRole('Company'))
 
                                         <div class="form-group row">
                                             <label for="center-company" class="col-md-4 col-form-label text-md-right">{{ __('Name Company') }}</label>
