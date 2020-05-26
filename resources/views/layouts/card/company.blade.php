@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
-            <h5 class="d-inline card-title w-auto mr-auto">{{ $user['center']." | ".(Auth::user()->hasRole('Administrator')?$user['email']:'')}}  </h5>
+            <h5 class="d-inline card-title w-auto mr-auto">{{ $user['center'].(Auth::user()->hasRole('Administrator')?" | ".$user['email']:'')}}  </h5>
         </div>
 
         <div class="buttons-group">

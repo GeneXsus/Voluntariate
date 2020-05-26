@@ -50,6 +50,7 @@
     "there are no open offers": "no hay ofertas abiertas",
     "there are no closed offers": "no hay ofertas cerradas",
     "there is any rating": "no hay valoraciones",
+    "there is any users register": "no hay usuarios registrados",
     "New Offer": "Nueva Oferta",
     "Unspecified": "Sin especificar",
     "Name (Spanish)": "Nombre (Español)",
@@ -72,6 +73,8 @@
     "Are you sure you want to abrirlo it?": "¿Estás seguro de abrirlo?",
     "Are you sure you want to unsubscribe?": "¿Estás seguro de que quieres desuscribirte?",
     "Are you sure you want to subscribe?": "¿Estás seguro de que quieres suscribirte?",
+    "Are you sure you want to refuse him?": "¿Estás seguro de que quieres rechazarlo?",
+    "Are you sure you want to accept him?": "¿Estás seguro de que quieres accept?",
     "Delete": "Eliminar",
     "Cancel": "Cancelar",
     "Unauthorized action": "Acción no autorizada",
@@ -86,9 +89,12 @@
     "Poor": "Mala",
     "Very Poor": "Muy Mala",
     "Ratings": "Valoraciones",
-    "Usuario Ratings": "Valoraciones del usuario",
+    "Users Ratings": "Valoraciones del usuario",
+    "Users Registereds": "Usuarios Registrados",
     "SUBSCRIBE": "SUSCRIBIRSE",
     "UNSUBSCRIBE": "DESUSCRIBIRSE",
+    "Not Rated": "No Evaluado",
+    "Accept": "Aceptar",
     "The password is incorrect.": "La contraseña es incorrecta."
 
 

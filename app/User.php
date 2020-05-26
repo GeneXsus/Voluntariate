@@ -51,18 +51,19 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function messages()
+    public function messagesSend()
     {
 
         return $this->hasMany(Message::class);
     }
+
 
     /**
      * Offer created by user
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function offers()
+    public function messageRecived()
     {
         return $this->hasMany(Offer::class);
     }
@@ -73,7 +74,15 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function registereds(){
-        return $this->belongsToMany(Offer::class, 'registereds', 'user_id', 'offer_id');
+        return $this->belongsToMany(Offer::class, 'registereds', 'user_id', 'offer_id')->withPivot('acepted');
+    }
+    /**
+     *  offer where user registered and acepted
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function registeredsAcepted(){
+        return $this->belongsToMany(Offer::class, 'registereds', 'user_id', 'offer_id')->wherePivot('acepted',1);
     }
 
 
@@ -126,6 +135,14 @@ class User extends Authenticatable
 
         return $ratingsValue;
 
+    }
+
+    /**
+     * Rating of a offer
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offers(){
+        return $this->HasMany(Offer::Class);
     }
 
 

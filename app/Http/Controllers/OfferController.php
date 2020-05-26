@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Offer;
 use App\Type;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 
 class OfferController extends Controller
@@ -26,11 +28,13 @@ class OfferController extends Controller
         if( $user->hasRole('User')){
             $offers_registered_open=$user->registereds->where('closed',0);
             $offers_registered_closed=$user->registereds->where('closed',1);
-            $offers_registered_acepted=$user->registereds->where('acepted',1);
+            $offers_registered_acepted=$user->registeredsAcepted;
+
             $values=['offers'=>$offers_registered_open,'offers_closed'=>$offers_registered_closed,'offers_acepted'=>$offers_registered_acepted];
         }
 
         if( $user->hasRole('Company')){
+
             $offers_open=$user->offers->where('closed',0);
             $offers_closed=$user->offers->where('closed',1);
             $values=['offers'=>$offers_open,'offers_closed'=>$offers_closed];
@@ -52,8 +56,19 @@ class OfferController extends Controller
     {
         $userAuth = Auth::user();
 
-        $isSubscribe= ($userAuth&& $userAuth->registereds()->where('offer_id',$offer->id)->first() != null)?true:false;
-        return view('offers.show', ['offer' => $offer,'isSubscribe'=>$isSubscribe]);
+        if($userAuth->hasRole('Company'))
+        {
+            $registereds= $offer->registereds;
+
+            $values= ['offer' => $offer,'isSubscribe'=>false, 'registereds'=>$registereds];
+        }else{
+
+            $isSubscribe= ($userAuth&& $userAuth->registereds()->where('offer_id',$offer->id)->first() != null)?true:false;
+            $values= ['offer' => $offer,'isSubscribe'=>$isSubscribe];
+        }
+
+
+        return view('offers.show', $values);
     }
 
     /**
@@ -184,7 +199,7 @@ class OfferController extends Controller
         $user = Auth::user();
         if( $user &&  ( !$user->hasRole(['Administrator', 'Company'])))
         {
-            $offer->registered()->attach($user->id);
+            $offer->registereds()->attach($user->id);
             return redirect()->back();
         }else{
             abort(403, 'Unauthorized action.');
@@ -203,7 +218,7 @@ class OfferController extends Controller
         $user = Auth::user();
         if( $user &&  (!$user->hasRole(['Administrator', 'Company'])))
         {
-            $offer->registered()->detach($user->id);
+            $offer->registereds()->detach($user->id);
             return redirect()->back();
         }else{
             abort(403, 'Unauthorized action.');
@@ -243,5 +258,53 @@ class OfferController extends Controller
             'end_date' => ['required','date_format:Y-m-d','after_or_equal:end_date']
         ]);
 
+    }
+
+    /**
+     *  Susbcribe user to offer.
+     *
+     * @param \App\Offer $offer
+     * @param \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function accept(Offer $offer ,User $user)
+    {
+
+        $userAuth = Auth::user();
+        if( $userAuth &&  $userAuth->id == $offer['user_id'])
+        {
+
+            DB::table('registereds')
+                ->where('offer_id',$offer->id)
+                ->where('user_id',$user->id)
+                ->update(['acepted' => 1]);
+
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
+    }
+    /**
+     *  Susbcribe user to offer.
+     *
+     * @param \App\Offer $offer
+     * @param \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function refuse(Offer $offer ,User $user)
+    {
+
+        $userAuth = Auth::user();
+        if( $userAuth &&  $userAuth->id == $offer['user_id'])
+        {
+
+            DB::table('registereds')
+                ->where('offer_id',$offer->id)
+                ->where('user_id',$user->id)
+                ->update(['acepted' => 0]);
+            return redirect()->back();
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

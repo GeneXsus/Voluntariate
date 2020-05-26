@@ -43,7 +43,8 @@ class UserController extends Controller
         } else {
 
             $canRate = true;
-
+            $offers_open=$user->offers->where('closed',0);
+            $offers_closed=$user->offers->where('closed',1);
             if ($user->id == $userAuth->id) {
                 $canRate = false;
             } else {
@@ -55,7 +56,7 @@ class UserController extends Controller
                 }
 
             }
-            return view('users.show', ["user" => $user, "canRate" => $canRate]);
+            return view('users.show', ["user" => $user, "canRate" => $canRate,'offers'=>$offers_open,'offers_closed'=>$offers_closed]);
 
         }
     }

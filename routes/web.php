@@ -31,6 +31,8 @@ Route::middleware(['verified'])->group(function () {
     Route::post('/offers/{offer}/toogle', 'OfferController@toogle')->name('offers.toogle');
     Route::post('/offers/{offer}/subscribe', 'OfferController@subscribeUser')->name('offers.subscribe');
     Route::post('/offers/{offer}/unsubscribe', 'OfferController@unsubscribeUser')->name('offers.unsubscribe');
+    Route::post('/offers/{offer}/{user}/accept', 'OfferController@accept')->name('offers.accept');
+    Route::post('/offers/{offer}/{user}/refuse', 'OfferController@refuse')->name('offers.refuse');
     Route::delete('/offers/{offer}', 'OfferController@destroy')->name('offers.delete');
 
     //type

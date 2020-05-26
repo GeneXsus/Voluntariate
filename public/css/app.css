@@ -13978,7 +13978,7 @@ a.text-dark:focus {
 
 .card-button {
   position: relative;
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 @media (max-width: 767px) {

@@ -8,13 +8,17 @@
                                                           class="enlace ml-1 mr-1">{{$offer->user['center']}}</a></small>
                 @if($offer->user->ratingsValue()>=0)
 
-                    <div class="rating-starts">
+                    <div class="rating-starts" title="{{$offer->user->ratingsValue()}}">
                         @for($i = 1; $i < 6; $i++)
                             <span class="float-left"><i
-                                    class="text-warning fa {{$i>$offer->user->ratingsValue()?'fa-star-o':'fa-star'}}"></i></span>
+                                    class="text-warning fa {{$i>$offer->user->ratingsValue()?($i>$offer->user->ratingsValue()+0.5? 'fa-star-o': 'fa-star-half-o'):'fa-star'}}"></i></span>
                         @endfor
-                        <small class="ml-1">{{$offer->user->ratingsValue()}}</small>
                     </div>
+                    @else
+                    <div class="rating-starts">
+                        <span class="text-danger"><small>{{__("Not Rated")}}</small></span>
+                    </div>
+
                 @endif
             @else
                 <small class="enlace missing ml-1 mr-1">{{__('Missing User')}}</small>

@@ -17,8 +17,18 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->text('message');
             $table->string('name',200);
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->integer('chat_id')->unsigned();
+            $table->integer('user_send_id')->unsigned();
+            $table->integer('user_receiver_id')->unsigned();
             $table->foreignId('offer_id')->constrained()->cascadeOnDelete();
+            $table->foreign('user_send_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
+            $table->foreign('user_receiver_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

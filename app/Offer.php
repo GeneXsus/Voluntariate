@@ -40,8 +40,8 @@ class Offer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function registered(){
-        return $this->belongsToMany('App\User', 'registereds', 'offer_id', 'user_id');
+    public function registereds(){
+        return $this->belongsToMany(User::class, 'registereds', 'offer_id', 'user_id')->withPivot('acepted');
     }
 
     public function path(){
@@ -57,4 +57,6 @@ class Offer extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+
 }
