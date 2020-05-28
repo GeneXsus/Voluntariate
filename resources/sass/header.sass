@@ -1,0 +1,38 @@
+.language
+    width: $width-language
+
+.cabecera
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    z-index: 9000
+    background: $primary
+    .navbar-toggler
+        background: $white
+    .navbar-brand
+        color: $white
+        &:hover
+            color: $secondary-dark
+    .navbar-nav
+
+        .nav-item
+            a,.navbar-nav, .nav-link
+                color: $white
+                &:hover
+                    color: $secondary-dark
+
+        .dropdown-menu
+            background: $primary
+            @include media(xs)
+                padding: 0.5rem !important
+
+
+
+        .dropdown-item
+            border-radius: 0.25rem
+            &:hover,&:focus
+                background: $primary-light
+            &.active
+                background: $primary-dark
+

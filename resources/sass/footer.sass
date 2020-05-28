@@ -1,0 +1,35 @@
+.page-footer
+    padding: 1rem 0
+    width: 100%
+    z-index: 9999
+    background: $primary-light
+    .footer-content
+        display: flex
+        justify-content: space-between
+        align-items: center
+        color: $secondary
+        flex-wrap: wrap
+
+        a
+            color: $white
+            text-decoration: none
+            &:hover
+                color: $secondary-light
+        ul
+            list-style: none
+            margin: 0
+            padding: 0
+            li
+                list-style: none
+
+        @include media(xs)
+            text-align: center
+            div
+                width: 100%
+            ul
+                margin-bottom: 0.8rem
+
+                li
+                    width: 100%
+
+

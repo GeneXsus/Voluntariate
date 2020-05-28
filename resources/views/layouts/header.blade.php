@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm cabecera">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -56,13 +56,13 @@
 
                         <div class="dropdown-menu  dropdown-menu-right animated fadeInUp" aria-labelledby="navbarDropdown">
                             @if(!Auth::user()->hasRole('Administrator'))
-                            <a class="dropdown-item nav-link {{ (Route::currentRouteName() =='users.editSelf') ? 'active' : '' }}" href="{{route('users.editSelf',Auth::user()) }}">
+                            <a class="internal dropdown-item nav-link {{ (Route::currentRouteName() =='users.editSelf') ? 'active' : '' }}" href="{{route('users.editSelf',Auth::user()) }}">
                                 {{ __('Edit Profile') }}
                             </a>
                             @endif
 
 
-                            <a class="dropdown-item nav-link" href="{{ route('logout') }}"
+                            <a class="internal dropdown-item nav-link" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

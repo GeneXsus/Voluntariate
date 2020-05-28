@@ -16,7 +16,7 @@
 
         @if(Auth::user()->can('delete_user') ||Auth::user()->id==$rating->userRated->id)
             <div class="buttons-group ">
-            <button class="btn btn-danger swalButton"
+            <button class="btn btn-sm btn-danger swalButton"
                     data-form-send="delete-form-{{$rating->userRated->id}}-{{$rating->userRating->id}}"
                     data-title-swal="{{__('Delete')}}"
                     data-text-swal="{{__('Are you sure you want to delete it?')}}"

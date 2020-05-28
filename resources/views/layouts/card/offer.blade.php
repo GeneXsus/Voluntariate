@@ -29,11 +29,11 @@
 
         <p class="card-text">{{ $offer['description_short'] }}</p>
         <div class="buttons-group ">
-            <a href="{{route("offers.show",$offer)}}" class="btn btn-primary">{{__("See")}}</a>
+            <a href="{{route("offers.show",$offer)}}" class="btn btn-sm btn-primary">{{__("See")}}</a>
             @if( Auth::user()&&( Auth::user()->can('admin')||  Auth::user()->id==$offer['user_id']))
-                <a href="{{route("offers.edit",$offer)}}" class="btn btn-success">{{__("Edit")}}</a>
+                <a href="{{route("offers.edit",$offer)}}" class="btn btn-sm btn-success">{{__("Edit")}}</a>
 
-                <button class="btn btn-warning swalButton"
+                <button class="btn btn-sm btn-warning swalButton"
                         @if($offer->closed)
                         data-form-send="toogle-closed-form-{{$offer->id}}"
                         data-title-swal="{{__('Open')}}"
@@ -66,7 +66,7 @@
                       style="display: none;">
                     @csrf
                 </form>
-                <button class="btn btn-danger swalButton"
+                <button class="btn btn-sm btn-danger swalButton"
                         data-form-send="delete-form-{{$offer->id}}"
                         data-title-swal="{{__('Delete')}}"
                         data-text-swal="{{__('Are you sure you want to delete it?')}}"

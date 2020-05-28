@@ -65,7 +65,7 @@
     <div id="app">
         @include('layouts/header')
 
-        <main class="py-4">
+        <main class="py-4 contenedor">
             @yield('content')
         </main>
         @include('layouts/footer')

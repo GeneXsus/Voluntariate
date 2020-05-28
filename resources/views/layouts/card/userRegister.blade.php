@@ -19,11 +19,11 @@
             @endif
         </div>
         <div class="buttons-group ">
-            <a href="{{route("users.show",$user)}}" class="btn btn-primary">{{__("See")}}</a>
+            <a href="{{route("users.show",$user)}}" class="btn btn-sm btn-primary">{{__("See")}}</a>
 
             @if($user->pivot->acepted)
 
-                <button class="btn btn-danger  swalButton"
+                <button class="btn btn-sm btn-danger  swalButton"
                         data-form-send="refuse-form-{{$user->id}}"
                         data-title-swal="{{__('Refuse')}}"
                         data-text-swal="{{__('Are you sure you want to refuse him?')}}"
@@ -40,7 +40,7 @@
                     @csrf
                 </form>
             @else
-                <button class="btn btn-success  swalButton"
+                <button class="btn btn-sm btn-success  swalButton"
                         data-form-send="acept-form-{{$user->id}}"
                         data-title-swal="{{__('Accept')}}"
                         data-text-swal="{{__('Are you sure you want to refuse him?')}}"

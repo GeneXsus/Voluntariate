@@ -30,7 +30,7 @@ class Type extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function preferred(){
-        return $this->belongsToMany(Type::Class, 'preferred_types', 'type_id', 'user_id');
+        return $this->belongsToMany(User::Class, 'preferred_types', 'type_id', 'user_id');
 
     }
 

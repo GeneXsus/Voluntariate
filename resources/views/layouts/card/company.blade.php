@@ -5,12 +5,12 @@
         </div>
 
         <div class="buttons-group">
-            <a href="{{route("users.show",$user)}}" class="btn btn-primary">{{__("See")}}</a>
+            <a href="{{route("users.show",$user)}}" class="btn btn-sm btn-primary">{{__("See")}}</a>
             @can('edit_user')
-                <a href="{{route("users.edit",$user)}}" class="btn btn-success">{{__("Edit")}}</a>
+                <a href="{{route("users.edit",$user)}}" class="btn btn-sm btn-success">{{__("Edit")}}</a>
             @endcan
             @can('delete_user')
-                <button class="btn btn-danger swalButton"
+                <button class="btn btn-sm btn-danger swalButton"
                         data-form-send="delete-form-{{$user->id}}"
                         data-title-swal="{{__('Delete')}}"
                         data-text-swal="{{__('Are you sure you want to delete it?')}}"

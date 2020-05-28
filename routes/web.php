@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
-
+Route::get('privacidad', function (){ return   view('legal.privacidad');})->name('legal.privacidad');
+Route::get('cookies', function (){ return   view('legal.cookies');})->name('legal.cookies');
+Route::get('aviso', function (){ return   view('legal.avisoLegal');})->name('legal.avisoLegal');
 
 
 Route::middleware(['verified'])->group(function () {
@@ -64,6 +66,7 @@ Route::middleware(['verified'])->group(function () {
 });
 
 Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
 
 
 

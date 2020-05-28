@@ -143,10 +143,19 @@ class UserController extends Controller
         if ($userAuth) {
             $json = File::get(public_path() . "/assets/locations.json");
             $locations = json_decode($json, true);
-//            $types =Type::all();
-//            TODO hacer type
             $errorPass=$request['errorPass']?? false;
-            return view('users.editSelf', ['user' => $userAuth, 'locations' => $locations, 'types' => '', 'errorPass'=>$errorPass]);
+            $values=['user' => $userAuth, 'locations' => $locations, 'errorPass'=>$errorPass];
+            if($userAuth->hasRole('User')){
+                $types=Type::all()->sortBy('name');
+                $typesSelected= $userAuth->preferred;
+                $typesSelectedId=[];
+                foreach ($typesSelected as $type){
+                    array_push($typesSelectedId,$type['id']);
+                }
+                $values=['user' => $userAuth, 'locations' => $locations, 'errorPass'=>$errorPass,'types'=>$types,"typesSelectedId"=>$typesSelectedId];
+
+            }
+            return view('users.editSelf',$values );
         } else {
             abort(403, 'Unauthorized action.');
         }
@@ -197,6 +206,12 @@ class UserController extends Controller
                             'email' => $request['email']
                         ]);
                     }
+
+                    $types=[];
+                    foreach ($request['types'] as $type) {
+                        array_push ($types,$type);
+                    }
+                    $user->preferred()->sync($types);
 
                 } elseif ($user->hasRole('Company')) {
 

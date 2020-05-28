@@ -74,6 +74,28 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label
+                                            class="col-md-4 col-form-label text-md-right">{{ __('Desired types') }}</label>
+
+                                        <div class="col-md-6">
+                                            <div class="types-group">
+                                                @foreach($types as $type)
+                                                    <div class="form-check form-check-inline"
+                                                         title="{{$type->description}}">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               id="type{{$type->id}}" name="types[]"
+
+                                                               @if((is_array(old('types')) && in_array($type->id, old('types')))) checked @endif
+                                                               value="{{$type->id}}">
+                                                        <label class="form-check-label"
+                                                               for="type{{$type->id}}">{{$type->name}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="description-es-user" class="col-md-4 col-form-label text-md-right">{{ __('Description (Spanish)') }}</label>
 
                                         <div class="col-md-6">
