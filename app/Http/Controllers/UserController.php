@@ -44,8 +44,8 @@ class UserController extends Controller
         } else {
 
             $canRate = true;
-            $offers_open=$user->offers->where('closed',0);
-            $offers_closed=$user->offers->where('closed',1);
+            $offers_open=$user->offers()->where('closed',0)->orderBy('updated_at','Desc')->get();
+            $offers_closed=$user->offers()->where('closed',1)->orderBy('updated_at','Desc')->get();
             if ($user->id == $userAuth->id) {
                 $canRate = false;
             } else {

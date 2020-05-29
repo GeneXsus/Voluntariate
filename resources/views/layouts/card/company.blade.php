@@ -2,6 +2,7 @@
     <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-100 text-center">{{ $user['center']." | ".$user['location'].(Auth::user()->hasRole('Administrator')?" | ".$user['email']:'')}}  </h5>
+            <h5 class="d-inline card-title w-100 text-center">{{ $user['center']." | ".$user['location'].(Auth::user()->hasRole('Administrator')?" | ".$user['email']:'')}}  </h5>
         </div>
 
         <div class="buttons-group">

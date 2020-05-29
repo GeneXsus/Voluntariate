@@ -30,10 +30,10 @@ class OfferController extends Controller
 
             if ($user->hasRole('User')) {
 
-                $offers_registered_open = $user->registereds()->searcher($request['search'])->where('closed', 0)->get();
+                $offers_registered_open = $user->registereds()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at','Desc')->get();
 
-                $offers_registered_closed = $user->registereds()->searcher($request['search'])->where('closed', 1)->get();
-                $offers_registered_acepted = $user->registeredsAcepted()->searcher($request['search'])->get();
+                $offers_registered_closed = $user->registereds()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at','Desc')->get();
+                $offers_registered_acepted = $user->registeredsAcepted()->searcher($request['search'])->orderBy('updated_at','Desc')->get();
 
 
 
@@ -42,15 +42,15 @@ class OfferController extends Controller
 
             if ($user->hasRole('Company')) {
 
-                $offers_open = $user->offers()->searcher($request['search'])->where('closed', 0)->get();
-                $offers_closed = $user->offers()->searcher($request['search'])->where('closed', 1)->get();
+                $offers_open = $user->offers()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at','Desc')->get();
+                $offers_closed = $user->offers()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at','Desc')->get();
                 $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
             }
 
 
             if ($user->hasRole('Administrator')) {
-                $offers_open = Offer::where('closed', 0)->searcher($request['search'])->get();
-                $offers_closed = Offer::where('closed', 1)->searcher($request['search'])->get();
+                $offers_open = Offer::where('closed', 0)->searcher($request['search'])->orderBy('updated_at','Desc')->get();
+                $offers_closed = Offer::where('closed', 1)->searcher($request['search'])->orderBy('updated_at','Desc')->get();
                 $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
             }
             return view('offers.index', $values);
@@ -311,18 +311,4 @@ class OfferController extends Controller
         }
     }
 
-    /**
-     *  Search Offer
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function searcher(Request $request)
-    {
-        $offers = Offer::where("name", 'like', "%" . $request->texto . "%")
-            ->orWhere("description_short", 'like', "%" . $request->texto . "%")
-            ->orWhere("description", 'like', "%" . $request->texto . "%")
-            ->get();
-        return view("nombres.paginas", compact("nombres"));
-    }
 }

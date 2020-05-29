@@ -13952,6 +13952,99 @@ a.text-dark:focus {
   }
 }
 
+.card-header {
+  background: #5e92f3;
+  color: #ffffff;
+}
+
+.card-header .card-header-tabs .nav-item {
+  color: #ffffff;
+  border-color: white;
+  cursor: pointer;
+}
+
+.card-header .card-header-tabs .nav-item:hover {
+  background: #1976d2;
+}
+
+.card-header .card-header-tabs .nav-item.active {
+  background: white;
+  color: #333;
+  cursor: default;
+}
+
+.card-header.card-header-for-tabs {
+  background: #1976d2;
+  padding-top: 5px;
+  padding-bottom: 0;
+}
+
+.card-header.card-header-for-tabs .nav-item {
+  color: #ffffff;
+  border-color: white;
+  cursor: pointer;
+}
+
+.card-header.card-header-for-tabs .nav-item:hover {
+  background: #5e92f3;
+}
+
+.card-header.card-header-for-tabs .nav-item.active {
+  background: white;
+  color: #333;
+  cursor: default;
+}
+
+.collapse-head {
+  background: #534bae;
+}
+
+.collapse-head .card-header {
+  background: #534bae;
+}
+
+.collapse-head .buttons-for-colapse {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.collapse-head:hover {
+  background: #5e92f3;
+}
+
+.collapse-head:hover .card-header {
+  background: #5e92f3;
+}
+
+@media (max-width: 575px) {
+  .container-fluid,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #navbarSupportedContent {
+    margin-top: 10px;
+  }
+
+  #navbarSupportedContent a {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  nav {
+    padding: 0;
+  }
+
+  .user-header .card-title {
+    font-size: 1.8rem;
+  }
+}
+
 .language {
   width: 20px;
 }
@@ -13974,7 +14067,7 @@ a.text-dark:focus {
 }
 
 .cabecera .navbar-brand:hover {
-  color: #534bae;
+  color: #000051;
 }
 
 .cabecera .navbar-nav .nav-item a,
@@ -13986,7 +14079,7 @@ a.text-dark:focus {
 .cabecera .navbar-nav .nav-item a:hover,
 .cabecera .navbar-nav .nav-item .navbar-nav:hover,
 .cabecera .navbar-nav .nav-item .nav-link:hover {
-  color: #534bae;
+  color: #000051;
 }
 
 .cabecera .navbar-nav .dropdown-menu {
@@ -14033,7 +14126,7 @@ a.text-dark:focus {
 }
 
 .page-footer .footer-content a:hover {
-  color: #000051;
+  color: #534bae;
 }
 
 .page-footer .footer-content ul {
@@ -14137,5 +14230,42 @@ a.text-dark:focus {
 
 .card.closed {
   background: #dadada;
+}
+
+.chat {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat li {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li .chat-body p {
+  margin: 0;
+  color: #777777;
+}
+
+.panel-body {
+  overflow-y: scroll;
+  height: 350px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }
 

@@ -39,6 +39,8 @@
     "Description (Spanish)": "Descripción (Español)",
     "Description (English)": "Descripción (Inglés)",
     "Manage Offers": "Administrar Ofertas",
+    "Manage Users": "Administrar Usuarios",
+    "Manage Types" : "Administrar Tipos",
     "My Offers": "Mis Ofertas",
     "Acepted": "Aceptadas",
     "Registered": "Registrado",
@@ -102,10 +104,26 @@
     "Desired types": "Tipos Deseados",
     "Recommended": "Recomendados",
     "All": "Todos",
-    "Places": "Places",
     "Search": "Buscar",
     "Offers": "Ofertas",
-    "could not find what you were looking for": "no se puede encontrar lo que estabas buscando"
+    "could not find what you were looking for": "no se puede encontrar lo que estabas buscando",
+    "Description Short:": "Descripción Corta:",
+    "Description:": "Descripción:",
+    "Location:": "Provincia:",
+    "Init Date:": "Fecha de Inicio:",
+    "End Date:": "Fecha Fin:",
+    "Type:": "Tipo:",
+    "Places:": "Plazas:",
+    "Email:": "Correo:",
+    "Manager:": "Gestionador:",
+    "Detailed Information": "Información detallada",
+    "Deleted": "Eliminado",
+    "Created At:": "Creado:",
+    "Updated At:": "Actualizado:",
+    "Types": "Tipos",
+    "New Type": "Nuevo Tipo"
+
+
 
 
 

@@ -23,7 +23,7 @@
 
                 @endif
             @else
-                <small class="enlace missing ml-1 mr-1">{{__('Missing User')}}</small>
+                <small class="enlace missing ml-1 mr-1">{{$offer->center}}{{__('Eliminated')}}</small>
             @endif
 
 
@@ -34,7 +34,7 @@
         </div>
 
 
-        <p class="card-text text-center">{{ $offer['description_short'] }}</p>
+        <p class="card-text text-center"> {!! nl2br(e($offer->description_short)) !!}</p>
         <div class="buttons-group ">
             <a href="{{route("offers.show",$offer)}}" class="btn btn-sm btn-primary">{{__("See")}}</a>
             @if( Auth::user()&&( Auth::user()->can('admin')||  Auth::user()->id==$offer['user_id']))

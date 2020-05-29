@@ -5,7 +5,7 @@
         </div>
 
 
-        <p class="card-text">{{ $type['description'] }}</p>
+        <p class="card-text"> {!! nl2br(e($type->description)) !!}</p>
         <div class="buttons-group">
         @can('edit_type')
         <a href="{{route("types.edit",$type)}}" class="btn btn-sm btn-success">{{__("Edit")}}</a>

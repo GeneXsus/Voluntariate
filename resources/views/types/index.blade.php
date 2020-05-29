@@ -13,13 +13,19 @@
         <div class="row  justify-content-center">
 
             <div class="col-12">
-                @include('layouts.block.search')
-                <div class="card">
 
+                <div class="card">
+                    <div class="card-header mb-2">
+                        <h1 class="card-title w-100 text-center">{{__("Types")}}</h1>
+                    </div>
+                    <div class="col-12">
+                    @include('layouts.block.search')
+
+                    </div>
 
                             <div class="card-body" >
                                 <div class="row d-flex justify-content-center">
-                                    <h1 class="card-title w-100 text-center">{{__("Types")}}</h1>
+
 
 
 

@@ -2,18 +2,30 @@
 
 @section('content')
     <div class="container-fluid">
-        @include('layouts.block.search')
         <div class="row  justify-content-center">
             <div class="col-12">
                 <div class="card">
-                    <div class="nav nav-tabs card-header-tabs justify-content-center" id="nav-tab" role="tablist">
+                    <div class="col-12 d-flex justify-content-center text-center card-header mb-2  ">
+                        <h2 class="text-center card-title mt-2">{{__('Manage Users')}}
+                        </h2>
+
+                    </div>
+                    <div class="col-12">
+                        @include('layouts.block.search')
+
+                    </div>
+
+                    <div class=" card-header card-header-for-tabs col-12 mt-2">
+                        <div class="nav nav-tabs card-header-tabs justify-content-center m-0" id="nav-tab"
+                             role="tablist">
 
                             <a class="nav-item nav-link active " id="nav-users-tab" data-toggle="tab"
                                href="#nav-users" role="tab" aria-controls="nav-users"
                                aria-selected="true">{{ __('Users') }} </a>
 
-                        <a class="nav-item nav-link " id="nav-company-tab" data-toggle="tab" href="#nav-company"
-                           role="tab" aria-controls="nav-company" aria-selected="false">{{ __('Companies') }} </a>
+                            <a class="nav-item nav-link " id="nav-company-tab" data-toggle="tab" href="#nav-company"
+                               role="tab" aria-controls="nav-company" aria-selected="false">{{ __('Companies') }} </a>
+                        </div>
                     </div>
                     <div class="tab-content mt-3">
                         <div class="tab-pane fade show active " id="nav-users" role="tabpanel"
@@ -29,8 +41,6 @@
                                     </div>
                                 @endforelse
                             </div>
-
-
 
 
                         </div>

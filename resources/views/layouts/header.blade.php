@@ -43,7 +43,7 @@
 
                         <li class="nav-item">
                             <a class="dropdown-item nav-link {{ (strpos(Route::currentRouteName(), 'users') === 0) ? 'active' : '' }}" href="{{route('users.index') }}">
-                                {{ __('Manage User') }}
+                                {{ __('Manage Users') }}
                             </a>
                         </li>
                     @endcan

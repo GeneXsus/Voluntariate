@@ -28,13 +28,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-            $offers=Offer::searcher($request['search'])->where('closed',0)->get();
+            $offers=Offer::searcher($request['search'])->where('closed',0)->orderBy('updated_at','Desc')->get();
             if($user && $user->hasRole('User'))
             {
                 $favoriteTypes= array_values($user->preferred()->pluck('id')->toArray());
                 $offers_recommended= Offer::searcher($request['search'])->where(function ($query) use ($favoriteTypes,$user) {
                     $query->whereIn('type_id', $favoriteTypes)->orWhere("location", 'like', "%" . $user->location . "%");
-                })->where('closed',0)->get();
+                })->where('closed',0)->orderBy('updated_at','Desc')->get();
                 $values=['offers' => $offers, 'search'=>$request['search'],'offers_recommended'=>$offers_recommended];
 
             }else{

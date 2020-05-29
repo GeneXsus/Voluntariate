@@ -2,7 +2,8 @@
     <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-auto mr-auto">
-                {{$rating->userRated->hasRole('Company')? $rating->userRated->center: $rating->userRated->name." ".$rating->userRated->subname}}
+                <a href="{{route('users.show',["user"=>$rating->userRated])}}">{{$rating->userRated->hasRole('Company')? $rating->userRated->center: $rating->userRated->name." ".$rating->userRated->subname}}
+                </a>
             </h5>
             <div class="rating-starts">
                 @for($i = 0; $i < 5; $i++)
@@ -11,7 +12,7 @@
             </div>
         </div>
         <p>
-            {{$rating->description}}
+            {!! nl2br(e($rating->description)) !!}
         </p>
 
         @if(Auth::user()->can('delete_user') ||Auth::user()->id==$rating->userRated->id)

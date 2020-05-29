@@ -14,3 +14,65 @@
 .searchButton
     @include media(xs)
         width: 100%
+
+
+
+.card-header
+    background: $primary-light
+    color: $white
+    .card-header-tabs
+        .nav-item
+            color: $white
+            border-color: white
+            cursor: pointer
+            &:hover
+                background: $primary
+            &.active
+                background: white
+                color: $black
+                cursor: default
+
+
+
+    &.card-header-for-tabs
+        background: $primary
+        padding-top: 5px
+        padding-bottom: 0
+        .nav-item
+            color: $white
+            border-color: white
+            cursor: pointer
+            &:hover
+                background: $primary-light
+            &.active
+                background: white
+                color: $black
+                cursor: default
+
+.collapse-head
+    background: $secondary-light
+    .card-header
+        background: $secondary-light
+    .buttons-for-colapse
+        color: $white
+        text-decoration: none
+        font-size: 1.6rem
+    &:hover
+        background: $primary-light
+        .card-header
+            background: $primary-light
+@include media(xs)
+    .container-fluid
+        padding-left: 0
+        padding-right: 0
+    #navbarSupportedContent
+        margin-top: 10px
+        a
+            padding-left: 10px
+            padding-right: 10px
+    nav
+        padding: 0
+
+    .user-header
+        .card-title
+            font-size: 1.8rem

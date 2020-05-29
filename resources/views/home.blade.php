@@ -4,21 +4,32 @@
     <div class="container-fluid">
         <div class="w-100 ">
 
-            @include('layouts.block.search')
 
 
             @if(Auth::user() && Auth::user()->hasRole('User'))
                 <div class="card w-100 mt-3 ">
-                    <div class="nav nav-tabs card-header-tabs justify-content-center w-100" id="nav-tab" role="tablist">
-
-
-                        <a class="nav-item nav-link active " id="nav-recommended-tab" data-toggle="tab"
-                           href="#nav-recommended" role="tab" aria-controls="nav-recommended"
-                           aria-selected="true">{{ __('Recommended') }} </a>
-                        <a class="nav-item nav-link " id="nav-all-tab" data-toggle="tab" href="#nav-all"
-                           role="tab" aria-controls="nav-all" aria-selected="false">{{ __('All') }} </a>
+                    <div class="col-12 d-flex justify-content-center text-center card-header mb-2  ">
+                        <h2 class="text-center card-title mt-2">{{__('Offers')}}
+                        </h2>
 
                     </div>
+                    <div class="col-12">
+                        @include('layouts.block.search')
+
+                    </div>
+                    <div class=" card-header card-header-for-tabs col-12 mt-2">
+                        <div class="nav nav-tabs card-header-tabs justify-content-center w-100 m-0" id="nav-tab" role="tablist">
+
+
+                            <a class="nav-item nav-link active " id="nav-recommended-tab" data-toggle="tab"
+                               href="#nav-recommended" role="tab" aria-controls="nav-recommended"
+                               aria-selected="true">{{ __('Recommended') }} </a>
+                            <a class="nav-item nav-link " id="nav-all-tab" data-toggle="tab" href="#nav-all"
+                               role="tab" aria-controls="nav-all" aria-selected="false">{{ __('All') }} </a>
+
+                        </div>
+                    </div>
+
                     <div class="tab-content mt-3">
                         <div class="tab-pane fade  show active w-100" id="nav-recommended" role="tabpanel"
                              aria-labelledby="nav-recommended-tab">
@@ -75,9 +86,13 @@
 
             @else()
                 <div class="card  d-flex flex-wrap justify-content-center mt-3">
-                    <div class="col-12 d-flex justify-content-center text-center card-title  ">
+                    <div class="col-12 d-flex justify-content-center text-center card-header mb-2  ">
                         <h2 class="text-center card-title mt-2">{{__('Offers')}}
                         </h2>
+
+                    </div>
+                    <div class="col-12">
+                        @include('layouts.block.search')
 
                     </div>
                     <div class="w-100 d-flex justify-content-center flex-wrap mr-0 ml-0 ">
