@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
+        @include('layouts.block.search')
         <div class="row  justify-content-center">
             <div class="col-12">
                 <div class="card">
@@ -15,13 +16,23 @@
                            role="tab" aria-controls="nav-company" aria-selected="false">{{ __('Companies') }} </a>
                     </div>
                     <div class="tab-content mt-3">
-                        <div class="tab-pane fade show active" id="nav-users" role="tabpanel"
+                        <div class="tab-pane fade show active " id="nav-users" role="tabpanel"
                              aria-labelledby="nav-users-tab">
-                            @forelse ($usersUser as $user)
-                                @include('layouts.card.user')
-                            @empty
-                                @include('layouts.card.empty', ['message' => __('there are no users')])
-                            @endforelse
+                            <div class="d-flex w-100 flex-wrap justify-content-around align-items-center">
+                                @forelse ($usersUser as $user)
+                                    <div class="col-12 col-md-6 mt-3 mb-3">
+                                        @include('layouts.card.user')
+                                    </div>
+                                @empty
+                                    <div class="col-12 col-md-6">
+                                        @include('layouts.card.empty', ['message' => __('there are no users')])
+                                    </div>
+                                @endforelse
+                            </div>
+
+
+
+
                         </div>
 
 

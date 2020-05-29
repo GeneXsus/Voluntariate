@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row justify-content-center ">
+        <div class="row ">
             <div class="col-12 d-flex mb-3 justify-content-end">
                 @can('create_offer')
                     <a class="btn  btn-outline-primary" href="{{route('offers.create')}}"
@@ -10,6 +10,8 @@
                 @endcan
             </div>
         </div>
+
+        @include('layouts.block.search')
         <div class="card">
             <div class="nav nav-tabs card-header-tabs justify-content-center" id="nav-tab" role="tablist">
 
@@ -35,12 +37,19 @@
                         @forelse ($offers as $offer)
                             <div class="col-12 col-md-6 col-xl-4 mt-3 mb-3">
                                 @include('layouts.card.offer')
-                                @empty
-                                    <div class="col-12 mt-3 mb-3">
-                                        @include('layouts.card.empty', ['message' => __('you have not registered in any offer')])
-                                    </div>
-                                @endforelse
                             </div>
+                        @empty
+                            <div class="col-12 mt-3 mb-3">
+                                @if(isset($search))
+                                    @include('layouts.card.empty', ['message'
+                                    => __('could not find what you were looking for')])
+                                @else
+                                    @include('layouts.card.empty', ['message' => __('you have not registered in any offer')])
+                                @endif
+
+                            </div>
+                        @endforelse
+
                     </div>
                     <div class="tab-pane fade " id="nav-acepted" role="tabpanel"
                          aria-labelledby="nav-acepted-tab">
@@ -50,22 +59,39 @@
                             </div>
                         @empty
                             <div class="col-12 mt-3 mb-3">
-                                @include('layouts.card.empty', ['message' => __('you have not been accepted in any offer')])
+                                @if(isset($search))
+                                    @include('layouts.card.empty', ['message'
+                                    => __('could not find what you were looking for')])
+                                @else
+                                    @include('layouts.card.empty', ['message' => __('you have not been accepted in any offer')])
+                                @endif
+
                             </div>
                         @endforelse
                     </div>
                 @else
                     <div class="tab-pane fade show active " id="nav-offers" role="tabpanel"
                          aria-labelledby="nav-offers-tab">
+                        <div class="d-flex flex-wrap">
+
+
                         @forelse ($offers as $offer)
                             <div class="col-12 col-md-6 col-xl-4 mt-3 mb-3">
                                 @include('layouts.card.offer')
                             </div>
                         @empty
                             <div class="col-12 mt-3 mb-3">
-                                @include('layouts.card.empty', ['message' => __('there are no open offers')])
+                                @if(isset($search))
+                                    @include('layouts.card.empty', ['message'
+                                    => __('could not find what you were looking for')])
+                                @else
+                                    @include('layouts.card.empty', ['message' => __('there are no open offers')])
+                                @endif
+
+
                             </div>
                         @endforelse
+                        </div>
                     </div>
                 @endcan
 
@@ -77,7 +103,13 @@
                         </div>
                     @empty
                         <div class="col-12 mt-3 mb-3">
-                            @include('layouts.card.empty', ['message' => __('there are no closed offers')])
+                            @if(isset($search))
+                                @include('layouts.card.empty', ['message'
+                                => __('could not find what you were looking for')])
+                            @else
+                                @include('layouts.card.empty', ['message' => __('there are no closed offers')])
+                            @endif
+
                         </div>
                     @endforelse
                 </div>

@@ -15,39 +15,46 @@ class OfferController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $values=[];
-        if(!$user){
+        $values = [];
+        $search=$request['search']??'';
+        if (!$user) {
             abort(403, __("Unauthorized action."));
+        }else {
+
+
+            if ($user->hasRole('User')) {
+
+                $offers_registered_open = $user->registereds()->searcher($request['search'])->where('closed', 0)->get();
+
+                $offers_registered_closed = $user->registereds()->searcher($request['search'])->where('closed', 1)->get();
+                $offers_registered_acepted = $user->registeredsAcepted()->searcher($request['search'])->get();
+
+
+
+                $values = ['offers' => $offers_registered_open, 'offers_closed' => $offers_registered_closed, 'offers_acepted' => $offers_registered_acepted, 'search' => $search];
+            }
+
+            if ($user->hasRole('Company')) {
+
+                $offers_open = $user->offers()->searcher($request['search'])->where('closed', 0)->get();
+                $offers_closed = $user->offers()->searcher($request['search'])->where('closed', 1)->get();
+                $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
+            }
+
+
+            if ($user->hasRole('Administrator')) {
+                $offers_open = Offer::where('closed', 0)->searcher($request['search'])->get();
+                $offers_closed = Offer::where('closed', 1)->searcher($request['search'])->get();
+                $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
+            }
+            return view('offers.index', $values);
         }
-        if( $user->hasRole('User')){
-            $offers_registered_open=$user->registereds->where('closed',0);
-            $offers_registered_closed=$user->registereds->where('closed',1);
-            $offers_registered_acepted=$user->registeredsAcepted;
-
-            $values=['offers'=>$offers_registered_open,'offers_closed'=>$offers_registered_closed,'offers_acepted'=>$offers_registered_acepted];
-        }
-
-        if( $user->hasRole('Company')){
-
-            $offers_open=$user->offers->where('closed',0);
-            $offers_closed=$user->offers->where('closed',1);
-            $values=['offers'=>$offers_open,'offers_closed'=>$offers_closed];
-        }
-
-
-
-        if( $user->hasRole('Administrator')){
-            $offers_open=Offer::all()->where('closed',0);
-            $offers_closed=Offer::all()->where('closed',1);
-            $values=['offers'=>$offers_open,'offers_closed'=>$offers_closed];
-        }
-        return view('offers.index', $values);
 
     }
 
@@ -56,15 +63,14 @@ class OfferController extends Controller
     {
         $userAuth = Auth::user();
 
-        if($userAuth->hasRole('Company'))
-        {
-            $registereds= $offer->registereds;
+        if ($userAuth->hasRole('Company')) {
+            $registereds = $offer->registereds;
 
-            $values= ['offer' => $offer,'isSubscribe'=>false, 'registereds'=>$registereds];
-        }else{
+            $values = ['offer' => $offer, 'isSubscribe' => false, 'registereds' => $registereds];
+        } else {
 
-            $isSubscribe= ($userAuth&& $userAuth->registereds()->where('offer_id',$offer->id)->first() != null)?true:false;
-            $values= ['offer' => $offer,'isSubscribe'=>$isSubscribe];
+            $isSubscribe = ($userAuth && $userAuth->registereds()->where('offer_id', $offer->id)->first() != null) ? true : false;
+            $values = ['offer' => $offer, 'isSubscribe' => $isSubscribe];
         }
 
 
@@ -78,10 +84,10 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $json = File::get(public_path()."/assets/locations.json");
+        $json = File::get(public_path() . "/assets/locations.json");
         $locations = json_decode($json, true);
-        $types =Type::all();
-        return view('offers.create',['locations' => $locations,'types'=>$types]);
+        $types = Type::all();
+        return view('offers.create', ['locations' => $locations, 'types' => $types]);
     }
 
     /**
@@ -95,7 +101,7 @@ class OfferController extends Controller
         $user = Auth::user();
         $this->validateOffer();
         Offer::create([
-            'name'=>[
+            'name' => [
                 'en' => $request['nameEn'],
                 'es' => $request['nameEs']
             ],
@@ -107,12 +113,12 @@ class OfferController extends Controller
                 'en' => $request['descriptionShortEn'],
                 'es' => $request['descriptionShortEs']
             ],
-            'location'=>$request['location'],
-            'places'=>$request['places'],
+            'location' => $request['location'],
+            'places' => $request['places'],
             'init_date' => $request['init_date'],
             'end_date' => $request['end_date'],
             'center' => $user['center'],
-            'type_id'=> $request['type'],
+            'type_id' => $request['type'],
             'user_id' => $user['id']
         ]);
 
@@ -129,10 +135,10 @@ class OfferController extends Controller
      */
     public function edit(Offer $offer)
     {
-        $json = File::get(public_path()."/assets/locations.json");
+        $json = File::get(public_path() . "/assets/locations.json");
         $locations = json_decode($json, true);
-        $types =Type::all();
-        return view('offers.edit', ['offer' => $offer,"locations"=>$locations,'types'=>$types]);
+        $types = Type::all();
+        return view('offers.edit', ['offer' => $offer, "locations" => $locations, 'types' => $types]);
     }
 
     /**
@@ -142,11 +148,11 @@ class OfferController extends Controller
      * @param \App\Offer $offer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Offer $offer)
+    public function update(Request $request, Offer $offer)
     {
         $this->validateOffer();
         $offer->update([
-            'name'=>[
+            'name' => [
                 'en' => $request['nameEn'],
                 'es' => $request['nameEs']
             ],
@@ -158,11 +164,11 @@ class OfferController extends Controller
                 'en' => $request['descriptionShortEn'],
                 'es' => $request['descriptionShortEs']
             ],
-            'location'=>$request['location'],
-            'places'=>$request['places'],
+            'location' => $request['location'],
+            'places' => $request['places'],
             'init_date' => $request['init_date'],
             'end_date' => $request['end_date'],
-            'type_id'=> $request['type']
+            'type_id' => $request['type']
         ]);
 
         return redirect($offer->path());
@@ -178,11 +184,10 @@ class OfferController extends Controller
     {
 
         $user = Auth::user();
-        if( $user &&  ($user->id== $offer['user_id'] ||  $user->hasRole('Administrator')))
-        {
-            $offer->update(['closed'=>($offer['closed']==0?1:0)]);
+        if ($user && ($user->id == $offer['user_id'] || $user->hasRole('Administrator'))) {
+            $offer->update(['closed' => ($offer['closed'] == 0 ? 1 : 0)]);
             return redirect()->back();
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
     }
@@ -197,11 +202,10 @@ class OfferController extends Controller
     {
 
         $user = Auth::user();
-        if( $user &&  ( !$user->hasRole(['Administrator', 'Company'])))
-        {
+        if ($user && (!$user->hasRole(['Administrator', 'Company']))) {
             $offer->registereds()->attach($user->id);
             return redirect()->back();
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
     }
@@ -216,11 +220,10 @@ class OfferController extends Controller
     {
 
         $user = Auth::user();
-        if( $user &&  (!$user->hasRole(['Administrator', 'Company'])))
-        {
+        if ($user && (!$user->hasRole(['Administrator', 'Company']))) {
             $offer->registereds()->detach($user->id);
             return redirect()->back();
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
     }
@@ -234,28 +237,29 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         $user = Auth::user();
-        if( $user && ($user['id']==$offer['user_id'] || $user->can('destroy_offer'))){
+        if ($user && ($user['id'] == $offer['user_id'] || $user->can('destroy_offer'))) {
             $offer->delete();
             return redirect(route('offers.index'));
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
 
     }
 
-    protected function validateOffer(){
+    protected function validateOffer()
+    {
         return request()->validate([
-            'nameEs'=>['required'],
-            'nameEn'=>['required'],
-            'descriptionShortEs'=>'required',
-            'descriptionShortEn'=>'required',
-            'descriptionEs'=>'required',
-            'descriptionEn'=>'required',
-            'location'=>'required',
-            'type'=>'required',
-            'places'=>['required','min:0','integer'],
-            'init_date' => ['required','date_format:Y-m-d','before_or_equal:date_end'],
-            'end_date' => ['required','date_format:Y-m-d','after_or_equal:end_date']
+            'nameEs' => ['required'],
+            'nameEn' => ['required'],
+            'descriptionShortEs' => 'required',
+            'descriptionShortEn' => 'required',
+            'descriptionEs' => 'required',
+            'descriptionEn' => 'required',
+            'location' => 'required',
+            'type' => 'required',
+            'places' => ['required', 'min:0', 'integer'],
+            'init_date' => ['required', 'date_format:Y-m-d', 'before_or_equal:date_end'],
+            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:end_date']
         ]);
 
     }
@@ -267,23 +271,23 @@ class OfferController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function accept(Offer $offer ,User $user)
+    public function accept(Offer $offer, User $user)
     {
 
         $userAuth = Auth::user();
-        if( $userAuth &&  $userAuth->id == $offer['user_id'])
-        {
+        if ($userAuth && $userAuth->id == $offer['user_id']) {
 
             DB::table('registereds')
-                ->where('offer_id',$offer->id)
-                ->where('user_id',$user->id)
+                ->where('offer_id', $offer->id)
+                ->where('user_id', $user->id)
                 ->update(['acepted' => 1]);
 
             return redirect()->back();
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
     }
+
     /**
      *  Susbcribe user to offer.
      *
@@ -291,20 +295,34 @@ class OfferController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function refuse(Offer $offer ,User $user)
+    public function refuse(Offer $offer, User $user)
     {
 
         $userAuth = Auth::user();
-        if( $userAuth &&  $userAuth->id == $offer['user_id'])
-        {
+        if ($userAuth && $userAuth->id == $offer['user_id']) {
 
             DB::table('registereds')
-                ->where('offer_id',$offer->id)
-                ->where('user_id',$user->id)
+                ->where('offer_id', $offer->id)
+                ->where('user_id', $user->id)
                 ->update(['acepted' => 0]);
             return redirect()->back();
-        }else{
+        } else {
             abort(403, 'Unauthorized action.');
         }
+    }
+
+    /**
+     *  Search Offer
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searcher(Request $request)
+    {
+        $offers = Offer::where("name", 'like', "%" . $request->texto . "%")
+            ->orWhere("description_short", 'like', "%" . $request->texto . "%")
+            ->orWhere("description", 'like', "%" . $request->texto . "%")
+            ->get();
+        return view("nombres.paginas", compact("nombres"));
     }
 }

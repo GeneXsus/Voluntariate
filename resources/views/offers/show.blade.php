@@ -6,7 +6,8 @@
             <div id="content">
                 <div class="title">
                     <h2>{{$offer->name}}</h2>
-                    <span class="byline">Mauris vulputate dolor sit amet nibh</span></div>
+                    <span class="byline">{{$offer->description_short}}</span>
+                </div>
 
                 <p>{{$offer->description}}</p>
                 @if($offer->user->ratings->count()>0)

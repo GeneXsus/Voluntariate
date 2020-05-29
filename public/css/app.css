@@ -13940,9 +13940,15 @@ a.text-dark:focus {
   min-height: calc(100vh - 150px);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .contenedor {
     min-height: calc(100vh - 185px);
+  }
+}
+
+@media (max-width: 575px) {
+  .searchButton {
+    width: 100%;
   }
 }
 
@@ -13987,7 +13993,7 @@ a.text-dark:focus {
   background: #1976d2;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .cabecera .navbar-nav .dropdown-menu {
     padding: 0.5rem !important;
   }
@@ -13997,13 +14003,13 @@ a.text-dark:focus {
   border-radius: 0.25rem;
 }
 
+.cabecera .navbar-nav .dropdown-item.active {
+  background: #004ba0;
+}
+
 .cabecera .navbar-nav .dropdown-item:hover,
 .cabecera .navbar-nav .dropdown-item:focus {
   background: #5e92f3;
-}
-
-.cabecera .navbar-nav .dropdown-item.active {
-  background: #004ba0;
 }
 
 .page-footer {
@@ -14040,7 +14046,7 @@ a.text-dark:focus {
   list-style: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .page-footer .footer-content {
     text-align: center;
   }
@@ -14100,7 +14106,7 @@ a.text-dark:focus {
   padding-bottom: 50px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .card-button {
     padding-bottom: 1.25rem;
   }
@@ -14120,12 +14126,16 @@ a.text-dark:focus {
   margin-right: 5px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   .card-button .buttons-group {
     margin: 5px;
     position: relative;
     bottom: auto;
     flex-wrap: wrap;
   }
+}
+
+.card.closed {
+  background: #dadada;
 }
 

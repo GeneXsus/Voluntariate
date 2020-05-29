@@ -1,21 +1,23 @@
-<div class="card h-100">
+<div class="card h-100 {{$offer['closed']? 'closed':''}}">
+
     <div class="card-body card-button">
-        <div class="d-flex flex-wrap-reverse justify-content-end">
-            <h5 class="d-inline card-title w-auto mr-auto">{{ $offer['name'] }} </h5>
-            <small class="text-muted text-right ">{{$offer->type['name']??__('Unspecified')}}</small>
+        <div class="d-flex  justify-content-around flex-wrap mb-1">
+            <small class="text-muted text-right ml-1 mr-1">{{$offer->type['name']??__('Unspecified')}}</small>
+            <small class="text-muted text-right ml-1 mr-1">{{$offer->location}}</small>
+            <small class="text-muted text-right ml-1 mr-1 text-nowrap">{{__('Places')}} : {{$offer->places}}</small>
             @if ($offer->user)
                 <small class="text-muted text-right "> <a href="{{route("users.show",$offer->user)}}"
                                                           class="enlace ml-1 mr-1">{{$offer->user['center']}}</a></small>
                 @if($offer->user->ratingsValue()>=0)
 
-                    <div class="rating-starts" title="{{$offer->user->ratingsValue()}}">
+                    <div class="rating-starts ml-1" title="{{$offer->user->ratingsValue()}}">
                         @for($i = 1; $i < 6; $i++)
                             <span class="float-left"><i
                                     class="text-warning fa {{$i>$offer->user->ratingsValue()?($i>$offer->user->ratingsValue()+0.5? 'fa-star-o': 'fa-star-half-o'):'fa-star'}}"></i></span>
                         @endfor
                     </div>
-                    @else
-                    <div class="rating-starts">
+                @else
+                    <div class="rating-starts ml-1">
                         <span class="text-danger"><small>{{__("Not Rated")}}</small></span>
                     </div>
 
@@ -24,10 +26,15 @@
                 <small class="enlace missing ml-1 mr-1">{{__('Missing User')}}</small>
             @endif
 
+
+        </div>
+        <div class="d-flex justify-content-center ">
+            <h5 class="d-inline card-title w-auto  text-center">{{ $offer['name'] }} </h5>
+
         </div>
 
 
-        <p class="card-text">{{ $offer['description_short'] }}</p>
+        <p class="card-text text-center">{{ $offer['description_short'] }}</p>
         <div class="buttons-group ">
             <a href="{{route("offers.show",$offer)}}" class="btn btn-sm btn-primary">{{__("See")}}</a>
             @if( Auth::user()&&( Auth::user()->can('admin')||  Auth::user()->id==$offer['user_id']))

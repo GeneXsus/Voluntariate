@@ -10,13 +10,13 @@ class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $types= Type::all();
-        return view('types.index',["types"=>$types]);
+        $types= Type::searcher($request['search'])->get();
+        return view('types.index',["types"=>$types , "search" => $request['search']]);
     }
 
     /**

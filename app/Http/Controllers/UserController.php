@@ -12,15 +12,16 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userAuth = Auth::user();
         if ($userAuth && $userAuth->hasRole('Administrator')) {
-            $usersUser = User::role('user')->get();
-            $usersCompany = User::role('Company')->get();
+            $usersUser = User::role('user')->searcher($request['search'])->get();
+
+            $usersCompany = User::role('Company')->searcher($request['search'])->get();
             return view('users.index', ["usersUser" => $usersUser, "usersCompany" => $usersCompany]);
         } else {
             abort(403, 'Unauthorized action.');

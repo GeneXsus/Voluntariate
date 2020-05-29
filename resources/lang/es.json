@@ -47,6 +47,9 @@
     "Sorry but :emptyObject": "Lo sentimos, pero :emptyObject",
     "you have not been accepted in any offer": "no le han aceptado en ninguna oferta",
     "you have not registered in any offer": "no se ha registrado en ninguna oferta",
+    "There are no recommended offers for you in your area and / or you do not have any type as a favorite":
+        "No hay ofertas recomendadas para ti en tu localidad y/o no tiene ningun tipo como favorito",
+    "Could not find any offer": "No podemos encontrar ninguna oferta",
     "there are no open offers": "no hay ofertas abiertas",
     "there are no closed offers": "no hay ofertas cerradas",
     "there is any rating": "no hay valoraciones",
@@ -96,7 +99,13 @@
     "Not Rated": "No Evaluado",
     "Accept": "Aceptar",
     "The password is incorrect.": "La contraseña es incorrecta.",
-    "Desired types": "Tipos Deseados"
+    "Desired types": "Tipos Deseados",
+    "Recommended": "Recomendados",
+    "All": "Todos",
+    "Places": "Places",
+    "Search": "Buscar",
+    "Offers": "Ofertas",
+    "could not find what you were looking for": "no se puede encontrar lo que estabas buscando"
 
 
 
