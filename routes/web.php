@@ -21,51 +21,51 @@ Route::get('cookies', function (){ return   view('legal.cookies');})->name('lega
 Route::get('aviso', function (){ return   view('legal.avisoLegal');})->name('legal.avisoLegal');
 
 
-Route::middleware(['verified'])->group(function () {
+
 
     //offers
-    Route::get('/offers', 'OfferController@index')->name('offers.index');
-    Route::post('/offers', 'OfferController@store')->name('offers.store');
-    Route::get('/offers/create', 'OfferController@create')->name('offers.create');
-    Route::get('/offers/{offer}', 'OfferController@show')->name('offers.show');
-    Route::get('/offers/{offer}/edit', 'OfferController@edit')->name('offers.edit');
-    Route::put('/offers/{offer}', 'OfferController@update')->name('offers.update');
-    Route::post('/offers/{offer}/toogle', 'OfferController@toogle')->name('offers.toogle');
-    Route::post('/offers/{offer}/subscribe', 'OfferController@subscribeUser')->name('offers.subscribe');
-    Route::post('/offers/{offer}/unsubscribe', 'OfferController@unsubscribeUser')->name('offers.unsubscribe');
-    Route::post('/offers/{offer}/{user}/accept', 'OfferController@accept')->name('offers.accept');
-    Route::post('/offers/{offer}/{user}/refuse', 'OfferController@refuse')->name('offers.refuse');
-    Route::delete('/offers/{offer}', 'OfferController@destroy')->name('offers.delete');
+    Route::get('/offers', 'OfferController@index')->name('offers.index')->middleware('verified');
+    Route::post('/offers', 'OfferController@store')->name('offers.store')->middleware('verified');
+    Route::get('/offers/create', 'OfferController@create')->name('offers.create')->middleware('verified');
+    Route::get('/offers/{offer}', 'OfferController@show')->name('offers.show')->middleware('verified');
+    Route::get('/offers/{offer}/edit', 'OfferController@edit')->name('offers.edit')->middleware('verified');
+    Route::get('/offers/chat/{chat_id}/{user}/{offer}', 'OfferController@chat')->name('offers.chat')->middleware('verified');
+    Route::put('/offers/{offer}', 'OfferController@update')->name('offers.update')->middleware('verified');
+    Route::post('/offers/{offer}/toogle', 'OfferController@toogle')->name('offers.toogle')->middleware('verified');
+    Route::post('/offers/{offer}/subscribe', 'OfferController@subscribeUser')->name('offers.subscribe')->middleware('verified');
+    Route::post('/offers/{offer}/unsubscribe', 'OfferController@unsubscribeUser')->name('offers.unsubscribe')->middleware('verified');
+    Route::post('/offers/{offer}/{user}/accept', 'OfferController@accept')->name('offers.accept')->middleware('verified');
+    Route::post('/offers/{offer}/{user}/refuse', 'OfferController@refuse')->name('offers.refuse')->middleware('verified');
+    Route::delete('/offers/{offer}', 'OfferController@destroy')->name('offers.delete')->middleware('verified');
 
     //type
-    Route::get('/types', 'TypeController@index')->name('types.index');
-    Route::post('/types', 'TypeController@store')->name('types.store');
-    Route::get('/types/create', 'TypeController@create')->name('types.create');
-    Route::get('/types/{type}', 'TypeController@show')->name('types.show');
-    Route::get('/types/{type}/edit', 'TypeController@edit')->name('types.edit');
-    Route::put('/types/{type}', 'TypeController@update')->name('types.update');
-    Route::delete('/types/{type}', 'TypeController@destroy')->name('types.delete');
+    Route::get('/types', 'TypeController@index')->name('types.index')->middleware('verified');
+    Route::post('/types', 'TypeController@store')->name('types.store')->middleware('verified');
+    Route::get('/types/create', 'TypeController@create')->name('types.create')->middleware('verified');
+    Route::get('/types/{type}', 'TypeController@show')->name('types.show')->middleware('verified');
+    Route::get('/types/{type}/edit', 'TypeController@edit')->name('types.edit')->middleware('verified');
+    Route::put('/types/{type}', 'TypeController@update')->name('types.update')->middleware('verified');
+    Route::delete('/types/{type}', 'TypeController@destroy')->name('types.delete')->middleware('verified');
 
     //user
-    Route::get('/users', 'UserController@index')->name('users.index');
-    Route::get('/users/editSelf', 'UserController@editSelf')->name('users.editSelf');
-    Route::put('/users/editSelf/update', 'UserController@updateSelf')->name('users.updateSelf');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::get('/users/{user}', 'UserController@show')->name('users.show');
-    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::put('/users/{user}', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user}', 'UserController@destroy')->name('users.delete');
+    Route::get('/users', 'UserController@index')->name('users.index')->middleware('verified');
+    Route::get('/users/editSelf', 'UserController@editSelf')->name('users.editSelf')->middleware('verified');
+    Route::put('/users/editSelf/update', 'UserController@updateSelf')->name('users.updateSelf')->middleware('verified');
+    Route::post('/users', 'UserController@store')->name('users.store')->middleware('verified');
+    Route::get('/users/create', 'UserController@create')->name('users.create')->middleware('verified');
+    Route::get('/users/{user}', 'UserController@show')->name('users.show')->middleware('verified');
+    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('verified');
+    Route::put('/users/{user}', 'UserController@update')->name('users.update')->middleware('verified');
+    Route::delete('/users/{user}', 'UserController@destroy')->name('users.delete')->middleware('verified');
 
-    Route::post('/ratings', 'RatingController@store')->name('ratings.store');
-    Route::delete('/ratings', 'RatingController@destroy')->name('ratings.delete');
+    Route::post('/ratings', 'RatingController@store')->name('ratings.store')->middleware('verified');
+    Route::delete('/ratings', 'RatingController@destroy')->name('ratings.delete')->middleware('verified');
 
-    Route::get('/chat', 'ChatsController@index');
-    Route::get('messages', 'ChatsController@fetchMessages');
-    Route::post('messages', 'ChatsController@sendMessage');
-});
+    Route::get('messages/{offer_id}/{chat_id}', 'ChatsController@fetchMessages')->middleware('verified');
+    Route::post('messages/{offer_id}/{chat_id}', 'ChatsController@sendMessage')->middleware('verified');
 
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap')->middleware('verified');
 
 
 

@@ -15,24 +15,17 @@ class ChatsController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show chats
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('chat');
-    }
+
 
     /**
      * Fetch all messages
-     *
+     * @param  Request $request
      * @return Message
      */
-    public function fetchMessages()
+    public function fetchMessages(Request $request)
     {
-        return Message::with('user')->get();
+
+        return Message::where('chat_id',$request['chat_id'])->with('user')->get();
     }
 
 
@@ -46,12 +39,20 @@ class ChatsController extends Controller
     {
         $user = Auth::user();
 
-        $message = $user->messages()->create([
-            'message' => $request->input('message')
-        ]);
+        if($user){
+            $message = Message::create([
+                'message' => $request->input('message'),
+                'chat_id' => $request['chat_id'],
+                'user_id' => $user->id,
+                'offer_id'=> $request['offer_id'],
+            ]);
 
-        broadcast(new MessageSent($user, $message))->toOthers();
+            broadcast(new MessageSent($user, $message,$request['chat_id']))->toOthers();
 
-        return ['status' => 'Message Sent!'];
+            return ['status' => 'Message Sent!'];
+        }else{
+            return ['status' => 'Error'];
+        }
+
     }
 }

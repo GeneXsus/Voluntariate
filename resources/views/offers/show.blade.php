@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="card ">
-                    <a class="collapse-head" data-toggle="collapse"  href="#detailed" role="button" aria-expanded="false"
+                    <a class="collapse-head" data-toggle="collapse" href="#detailed" role="button" aria-expanded="false"
                        aria-controls="detailed">
 
 
@@ -46,7 +46,7 @@
                                             <a href="{{route('users.show',['user'=>$offer->user])}}">{{$offer->user->center}}</a>
                                         @else
 
-                                             {{$offer->center}} ({{__("Eliminated")}})
+                                            {{$offer->center}} ({{__("Eliminated")}})
                                         @endif
                                     </p>
                                 </div>
@@ -54,7 +54,8 @@
                                     <p class="ml-auto text-right"> {{__("Type:")}}</p>
                                 </div>
                                 <div class=" col-6 col-sm-6 col-md-5">
-                                    <p class="text-justify" title="{{$offer->type->description}}"> {{$offer->type->name}}</p>
+                                    <p class="text-justify"
+                                       title="{{$offer->type->description}}"> {{$offer->type->name}}</p>
                                 </div>
                                 <div class=" col-6 col-sm-6 col-md-5  offset-md-1 ">
                                     <p class="ml-auto text-right"> {{__("Places:")}}</p>
@@ -93,15 +94,14 @@
                                     <p class="text-justify"> {{$offer->updated_at}}</p>
                                 </div>
 
-                                <div class="col-12 col-md-10 offset-md-1" >
+                                <div class="col-12 col-md-10 offset-md-1">
                                     <h4 class=" text-left descripcion-offer-tilte"> {{__("Description:")}}</h4>
 
                                 </div>
-                                <div class="col-12 col-md-8 offset-md-2" >
-                                        <p class="text-justify descripcion-offer"> {!! nl2br(e($offer->description)) !!}</p>
+                                <div class="col-12 col-md-8 offset-md-2">
+                                    <p class="text-justify descripcion-offer"> {!! nl2br(e($offer->description)) !!}</p>
 
                                 </div>
-
 
 
                             </div>
@@ -112,7 +112,8 @@
                 @if(Auth::user()->hasRole('Company'))
 
                     <div class="card ">
-                        <a class="collapse-head" data-toggle="collapse"  href="#registereds" role="button" aria-expanded="false"
+                        <a class="collapse-head" data-toggle="collapse" href="#registereds" role="button"
+                           aria-expanded="false"
                            aria-controls="registereds">
 
 
@@ -147,17 +148,17 @@
                 @endif
                 @if(Auth::user()->hasRole('User'))
                     @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings"),'show'=>'show'])
-                   @else
+                @else
                     @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings")])
 
-                    @endif
+                @endif
 
 
 
-                {{--                TODO CHAT--}}
-                @if($isSubscribe)
+                @if($isSubscribe && $offer->user)
                     <div class="card">
-                        <a class="collapse-head" data-toggle="collapse"  href="#chat" role="button" aria-expanded="false" aria-controls="chat">
+                        <a class="collapse-head" data-toggle="collapse" href="#chat" role="button" aria-expanded="false"
+                           aria-controls="chat">
 
 
                             <div class="card-header" id="ratingHeader">
@@ -174,21 +175,20 @@
                                 <div class="row d-flex justify-content-center">
 
 
-{{--                                    <div class="col-12 chat-offer">--}}
-{{--                                        <div class="panel panel-default">--}}
-{{--                                            <div class="panel-heading">{{__("Chats")}}</div>--}}
+                                    <div id="chat-vue" class="col-12 chat-offer">
+                                        <div class="panel panel-default">
 
-{{--                                            <div class="panel-body">--}}
-{{--                                                <chat-messages :messages="messages"></chat-messages>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="panel-footer">--}}
-{{--                                                <chat-form--}}
-{{--                                                    v-on:messagesent="addMessage"--}}
-{{--                                                    :user="{{ Auth::user() }}"--}}
-{{--                                                ></chat-form>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                            <div class="panel-body">
+                                                <chat-messages :messages="messages"></chat-messages>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <chat-form
+                                                    v-on:messagesent="addMessage"
+                                                    :user="{{ Auth::user() }}"
+                                                ></chat-form>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -250,3 +250,12 @@
 
 @endsection
 {{----}}
+@if($isSubscribe && $offer->user)
+    @section ('scripts')
+        <script type="text/javascript">
+            window.onload = function () {
+
+            }
+        </script>
+    @endsection
+@endif

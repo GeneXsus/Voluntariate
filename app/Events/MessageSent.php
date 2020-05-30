@@ -24,6 +24,13 @@ class MessageSent implements ShouldBroadcast
      * @var User
      */
     public $user;
+    /**
+     * char where sent the message
+     *
+     * @var String
+     */
+    public $chat;
+
 
     /**
      * Message details
@@ -37,10 +44,11 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, Message $message)
+    public function __construct(User $user, Message $message,$chat)
     {
         $this->user = $user;
         $this->message = $message;
+        $this->chat = $chat;
     }
 
     /**
@@ -50,6 +58,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat');
+        return new PrivateChannel( 'chat.'.$this->chat);
     }
 }

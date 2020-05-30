@@ -16,16 +16,10 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('message');
-            $table->string('name',200);
-            $table->integer('chat_id')->unsigned();
-            $table->integer('user_send_id')->unsigned();
-            $table->integer('user_receiver_id')->unsigned();
+            $table->string('chat_id', 30);
+            $table->integer('user_id')->unsigned();
             $table->foreignId('offer_id')->constrained()->cascadeOnDelete();
-            $table->foreign('user_send_id')
-                ->references('id')
-                ->on('users')
-                ->cascadeOnDelete();
-            $table->foreign('user_receiver_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->cascadeOnDelete();

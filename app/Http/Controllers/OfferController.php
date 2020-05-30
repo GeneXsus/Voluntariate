@@ -22,19 +22,18 @@ class OfferController extends Controller
     {
         $user = Auth::user();
         $values = [];
-        $search=$request['search']??'';
+        $search = $request['search'] ?? '';
         if (!$user) {
             abort(403, __("Unauthorized action."));
-        }else {
+        } else {
 
 
             if ($user->hasRole('User')) {
 
-                $offers_registered_open = $user->registereds()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at','Desc')->get();
+                $offers_registered_open = $user->registereds()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at', 'Desc')->get();
 
-                $offers_registered_closed = $user->registereds()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at','Desc')->get();
-                $offers_registered_acepted = $user->registeredsAcepted()->searcher($request['search'])->orderBy('updated_at','Desc')->get();
-
+                $offers_registered_closed = $user->registereds()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at', 'Desc')->get();
+                $offers_registered_acepted = $user->registeredsAcepted()->searcher($request['search'])->orderBy('updated_at', 'Desc')->get();
 
 
                 $values = ['offers' => $offers_registered_open, 'offers_closed' => $offers_registered_closed, 'offers_acepted' => $offers_registered_acepted, 'search' => $search];
@@ -42,15 +41,15 @@ class OfferController extends Controller
 
             if ($user->hasRole('Company')) {
 
-                $offers_open = $user->offers()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at','Desc')->get();
-                $offers_closed = $user->offers()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at','Desc')->get();
+                $offers_open = $user->offers()->searcher($request['search'])->where('closed', 0)->orderBy('updated_at', 'Desc')->get();
+                $offers_closed = $user->offers()->searcher($request['search'])->where('closed', 1)->orderBy('updated_at', 'Desc')->get();
                 $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
             }
 
 
             if ($user->hasRole('Administrator')) {
-                $offers_open = Offer::where('closed', 0)->searcher($request['search'])->orderBy('updated_at','Desc')->get();
-                $offers_closed = Offer::where('closed', 1)->searcher($request['search'])->orderBy('updated_at','Desc')->get();
+                $offers_open = Offer::where('closed', 0)->searcher($request['search'])->orderBy('updated_at', 'Desc')->get();
+                $offers_closed = Offer::where('closed', 1)->searcher($request['search'])->orderBy('updated_at', 'Desc')->get();
                 $values = ['offers' => $offers_open, 'offers_closed' => $offers_closed, 'search' => $search];
             }
             return view('offers.index', $values);
@@ -62,19 +61,23 @@ class OfferController extends Controller
     public function show(Offer $offer)
     {
         $userAuth = Auth::user();
+        if ($userAuth) {
+            $chat_id = $offer->id . 'o' . $offer->user->id . 'c' . Auth::user()->id . 'a';
+            if ($userAuth->hasRole('Company')) {
+                $registereds = $offer->registereds;
 
-        if ($userAuth->hasRole('Company')) {
-            $registereds = $offer->registereds;
+                $values = ['offer' => $offer, 'isSubscribe' => false, 'registereds' => $registereds, 'chat_id' => $chat_id];
+            } else {
 
-            $values = ['offer' => $offer, 'isSubscribe' => false, 'registereds' => $registereds];
+                $isSubscribe = ($userAuth && $userAuth->registereds()->where('offer_id', $offer->id)->first() != null) ? true : false;
+                $values = ['offer' => $offer, 'isSubscribe' => $isSubscribe, 'chat_id' => $chat_id];
+            }
+
+
+            return view('offers.show', $values);
         } else {
-
-            $isSubscribe = ($userAuth && $userAuth->registereds()->where('offer_id', $offer->id)->first() != null) ? true : false;
-            $values = ['offer' => $offer, 'isSubscribe' => $isSubscribe];
+            abort(403, 'Unauthorized action.');
         }
-
-
-        return view('offers.show', $values);
     }
 
     /**
@@ -310,5 +313,33 @@ class OfferController extends Controller
             abort(403, 'Unauthorized action.');
         }
     }
+
+
+    /**
+     *  Chat View.
+     *
+     * @param \App\Offer $offer
+     * @param \App\User $user
+
+     * @return \Illuminate\Http\Response
+     */
+    public function chat($chat_id, User $user, Offer $offer)
+    {
+
+        $userAuth = Auth::user();
+
+        if ($userAuth && $userAuth->id == $offer['user_id']) {
+            $userRegistered=$offer->registereds()->find($user)->first();
+           if($userRegistered) {
+
+               return view('offers.chat', ["chat_id" => $chat_id, "user" => $userRegistered, "offer" => $offer, 'isSubscribe'=>true]);
+           }else{
+               abort(404, __('User not registered.'));
+           }
+        } else {
+            abort(403, __('Unauthorized action.'));
+        }
+    }
+
 
 }

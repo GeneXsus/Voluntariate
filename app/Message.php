@@ -13,26 +13,16 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = ['message','chat_id'];
+    protected $fillable = ['message','user_id','chat_id','offer_id'];
 
     /**
      * A message belong to a user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function userSended()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'rating_by', 'id');;
-    }
-
-    /**
-     * A message belong to a user
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function userReceived()
-    {
-        return $this->belongsTo(User::class, 'rating_by', 'id');
+        return $this->belongsTo(User::class);
     }
 
 

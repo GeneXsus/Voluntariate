@@ -51,22 +51,11 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function messagesSend()
+    public function messages()
     {
-
         return $this->hasMany(Message::class);
     }
 
-
-    /**
-     * Offer created by user
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function messageRecived()
-    {
-        return $this->hasMany(Offer::class);
-    }
 
     /**
      *  offer where user registered

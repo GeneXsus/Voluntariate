@@ -14269,3 +14269,11 @@ a.text-dark:focus {
   background-color: #555;
 }
 
+.chat-offer .input-group {
+  display: flex;
+}
+
+.chat-offer .input-group .btn {
+  width: 50px;
+}
+

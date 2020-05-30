@@ -36,6 +36,8 @@
         @include('layouts/footer')
     </div>
 <script src="https://unpkg.com/sweetalert2@7.3.0/dist/sweetalert2.all.js"></script>
+
+
     <script type="text/javascript">
         window.onload = function()  {
             $( ".swalButton" ).on('click',function() {
@@ -79,11 +81,52 @@
                 $radio.closest('label').addClass('selected');
             });
 
+            @if(isset($chat_id) && isset($isSubscribe) && isset($offer) && $isSubscribe && $offer->user)
+                const app = new Vue({
+                    el: '#chat-vue',
+
+                    data: {
+                        messages: []
+                    },
+
+                    created() {
+                        this.fetchMessages();
+
+                        Echo.private('chat.{{$chat_id}}')
+                            .listen('MessageSent', (e) => {
+                                this.messages.push({
+                                    message: e.message.message,
+                                    user: e.user
+                                });
+                            });
+                    },
+
+                    methods: {
+                        fetchMessages() {
+                            axios.get('/messages/{{$offer->id}}/{{$chat_id}}').then(response => {
+                                this.messages = response.data;
+                            });
+                        },
+
+                        addMessage(message) {
+                            this.messages.push(message);
+
+                            axios.post('/messages/{{$offer->id}}/{{$chat_id}}', message).then(response => {
+                                console.log(response.data);
+                            });
+                        }
+                    },
+                    destroyed() {
+                        Echo.leave('chat.{{$chat_id}}' );
+                    }
+                });
+            @endif
+
+
         }
 
 
     </script>
 
-    @yield('scripts')
 </body>
 </html>

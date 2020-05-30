@@ -57,6 +57,7 @@
                 </form>
 
             @endif
+            <a href="{{route("offers.chat", ['chat_id'=>( $offer->id . 'o' . $offer->user->id . 'c' . $user->id.'a'),'user'=>$user,'offer'=>$offer])}}" class="btn btn-sm btn-warning">{{__("Chat")}}</a>
 
         </div>
     </div>
