@@ -1,4 +1,4 @@
-{{--TODO CambiarURLWEB--}}
+{{--TODO http://www.iestrassierra.net/alumnado/curso1920/DAW/daw1920a3/voluntariate--}}
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid">
@@ -18,7 +18,7 @@
 
 
             <h3>Entidad Responsable</h3>
-            <p class="ng-binding">La entidad responsable de la recogida, procesamiento y utilización de tus datos personales, en el sentido establecido por la Ley de Protección de Datos Personales es la página CambiarURLWEB, propiedad de Jesús Carrillo Castillo – calle falsa 123.</p>
+            <p class="ng-binding">La entidad responsable de la recogida, procesamiento y utilización de tus datos personales, en el sentido establecido por la Ley de Protección de Datos Personales es la página http://www.iestrassierra.net/alumnado/curso1920/DAW/daw1920a3/voluntariate, propiedad de Jesús Carrillo Castillo – calle falsa 123.</p>
 
             <h3>¿Qué son las cookies?</h3>
             <p>Las cookies son un conjunto de datos que un servidor deposita en el navegador del usuario para recoger la información de registro estándar de Internet y la información del comportamiento de los visitantes en un sitio web. Es decir, se trata de pequeños archivos de texto que quedan almacenados en el disco duro del ordenador y que sirven para identificar al usuario cuando se conecta nuevamente al sitio web. Su objetivo es registrar la visita del usuario y guardar cierta información. Su uso es común y frecuente en la web ya que permite a las páginas funcionar de manera más eficiente y conseguir una mayor personalización y análisis sobre el comportamiento del usuario.</p>

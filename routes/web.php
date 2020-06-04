@@ -61,11 +61,11 @@ Route::get('aviso', function (){ return   view('legal.avisoLegal');})->name('leg
     Route::post('/ratings', 'RatingController@store')->name('ratings.store')->middleware('verified');
     Route::delete('/ratings', 'RatingController@destroy')->name('ratings.delete')->middleware('verified');
 
-    Route::get('messages/{offer_id}/{chat_id}', 'ChatsController@fetchMessages')->middleware('verified');
-    Route::post('messages/{offer_id}/{chat_id}', 'ChatsController@sendMessage')->middleware('verified');
+    Route::get('/messages/{offer_id}/{chat_id}', 'ChatsController@fetchMessages')->middleware('verified');
+    Route::post('/messages/{offer_id}/{chat_id}', 'ChatsController@sendMessage')->middleware('verified');
 
 
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap')->middleware('verified');
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
 
 
 

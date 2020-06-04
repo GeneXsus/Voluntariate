@@ -120,7 +120,7 @@
                             <div class="card-header" id="ratingHeader">
                                 <h5 class="mb-0 d-flex justify-content-center">
                                     <button class="btn btn-link buttons-for-colapse">
-                                        {{__('Users Registereds')}}
+                                        {{__('Users Registereds')}} ({{$registereds->count()}})
                                     </button>
                                 </h5>
                             </div>
@@ -147,9 +147,9 @@
 
                 @endif
                 @if(Auth::user()->hasRole('User'))
-                    @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings"),'show'=>'show'])
+                    @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings"),'show'=>'show', 'rating_value'=>$offer->user->ratingsValue()])
                 @else
-                    @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings")])
+                    @include('layouts.block.rating.show', ['ratings' => $offer->user->ratings, 'ratingTitle'=>__("Users Ratings"), 'rating_value'=>$offer->user->ratingsValue()])
 
                 @endif
 

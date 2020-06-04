@@ -32,9 +32,11 @@ class HomeController extends Controller
             if($user && $user->hasRole('User'))
             {
                 $favoriteTypes= array_values($user->preferred()->pluck('id')->toArray());
+                $registerdsArray= array_values($user->registereds()->pluck('id')->toArray());
                 $offers_recommended= Offer::searcher($request['search'])->where(function ($query) use ($favoriteTypes,$user) {
                     $query->whereIn('type_id', $favoriteTypes)->orWhere("location", 'like', "%" . $user->location . "%");
-                })->where('closed',0)->orderBy('updated_at','Desc')->get();
+                })->where(function ($query) use ($registerdsArray,$user) {
+                    $query->whereNotIn('id', $registerdsArray);})->where('closed',0)->orderBy('updated_at','Desc')->get();
                 $values=['offers' => $offers, 'search'=>$request['search'],'offers_recommended'=>$offers_recommended];
 
             }else{

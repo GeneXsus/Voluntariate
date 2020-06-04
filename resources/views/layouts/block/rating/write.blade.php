@@ -30,7 +30,7 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Rate') }}</label>
 
 
-                            <div class="rating-form col-md-6 pt-1">
+                            <div class="rating-form col-md-12 col-md-6 pt-1">
                                 <label title="{{__('Very Good')}}">
                                     <input type="radio" name="rate" value="5" title="5 stars"> 5
                                 </label>

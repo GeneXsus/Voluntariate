@@ -6,13 +6,11 @@ namespace App\Events;
 
 use App\User;
 use App\Message;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
 
 class MessageSent implements ShouldBroadcast
 {
@@ -25,7 +23,7 @@ class MessageSent implements ShouldBroadcast
      */
     public $user;
     /**
-     * char where sent the message
+     * chat where sent the message
      *
      * @var String
      */
@@ -49,15 +47,23 @@ class MessageSent implements ShouldBroadcast
         $this->user = $user;
         $this->message = $message;
         $this->chat = $chat;
+
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
-    public function broadcastOn()
+
+    public function broadcastOn(){
+
+        return ['chat.'.$this->chat];
+    }
+
+    public function broadcastWith() // payload data to send
     {
-        return new PrivateChannel( 'chat.'.$this->chat);
+        return ['user'=>$this->user, 'message'=> $this->message];
+    }
+
+    public function broadcastAs() // event name on client
+    {
+
+        return 'MessageSent';
     }
 }

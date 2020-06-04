@@ -135,6 +135,19 @@ class User extends Authenticatable
     }
 
     /**
+     * See if him si last of talk in chat
+     * @return Boolean
+     */
+    public function unresponded($chatId){
+        $unresponded=false;
+        $last_chat=    Message::where('chat_id',$chatId)->orderBy('updated_at','Desc')->first();
+        $unresponded= ($last_chat && $last_chat['user_id']== $this->id)?true:false;
+
+        return $unresponded;
+    }
+
+
+    /**
      *  Buscador
      */
     public function scopeSearcher($query,$text){

@@ -16,7 +16,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('/favicon.ico') }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -91,25 +91,37 @@
 
                     created() {
                         this.fetchMessages();
+                        //use your own credentials you get from Pusher
+                        var pusher = new Pusher('e190b5eb2a677b3e0e0a', {
+                            cluster: 'eu',
+                            encrypted: false,
+                        });
 
-                        Echo.private('chat.{{$chat_id}}')
-                            .listen('MessageSent', (e) => {
-                                this.messages.push({
-                                    message: e.message.message,
-                                    user: e.user
-                                });
+                        //Subscribe to the channel we specified in our Adonis Application
+                        let channel = pusher.subscribe('chat.{{$chat_id}}');
+
+                        channel.bind('MessageSent', (e) => {
+                            console.log(e);
+                            this.messages.unshift({
+                                created_at: e.message.created_at,
+                                message: e.message.message,
+                                user: e.user
                             });
+                        })
+
+
                     },
 
                     methods: {
                         fetchMessages() {
                             axios.get('/messages/{{$offer->id}}/{{$chat_id}}').then(response => {
+
                                 this.messages = response.data;
                             });
                         },
 
                         addMessage(message) {
-                            this.messages.push(message);
+
 
                             axios.post('/messages/{{$offer->id}}/{{$chat_id}}', message).then(response => {
                                 console.log(response.data);
@@ -117,7 +129,7 @@
                         }
                     },
                     destroyed() {
-                        Echo.leave('chat.{{$chat_id}}' );
+                        pusher.unsubscribe('chat.{{$chat_id}}');
                     }
                 });
             @endif

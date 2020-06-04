@@ -1,4 +1,4 @@
-{{--TODO CambiarURLWEB--}}
+{{--TODO http://www.iestrassierra.net/alumnado/curso1920/DAW/daw1920a3/voluntariate--}}
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid">
@@ -17,7 +17,7 @@
                     <strong>Teléfono:</strong> 555-555-55<br>
                     <strong>Correo Electrónico:</strong> voluntariate2020@gmail.com<br>
                     <strong>Contacto:</strong> JesúsCarrilloCastillo<br>
-                    <strong>Nombre del dominio:</strong> CambiarURLWEB<br>
+                    <strong>Nombre del dominio:</strong> http://www.iestrassierra.net/alumnado/curso1920/DAW/daw1920a3/voluntariate<br>
 
 
                     <h3>Finalidades – ¿con qué finalidades tratamos tus datos?</h3>

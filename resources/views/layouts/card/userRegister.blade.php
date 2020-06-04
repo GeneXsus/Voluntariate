@@ -1,4 +1,5 @@
-<div class="card">
+<div class="card  @if($user->unresponded(( $offer->id . 'o' . $offer->user->id . 'c' . $user->id.'a'))) bg-info @endif
+    " >
     <div class="card-body  card-button">
         <div class="d-flex flex-wrap-reverse justify-content-end">
             <h5 class="d-inline card-title w-auto mr-auto">{{ $user['name']." ".$user['subname'].(Auth::user()->hasRole('Administrator')?" | ".$user['email']:'')}} </h5>

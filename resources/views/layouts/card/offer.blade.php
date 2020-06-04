@@ -1,4 +1,8 @@
-<div class="card h-100 {{$offer['closed']? 'closed':''}}">
+<div class="card h-100 {{$offer['closed']? 'closed':''}}  @if(Auth::user()
+                                                                && Auth::user()->hasRole('User')
+                                                                &&  $offer->user->unresponded(( $offer->id . 'o' . $offer->user->id . 'c' . Auth::user()->id.'a')))
+                                                                    bg-info
+                                                                        @endif">
 
     <div class="card-body card-button">
         <div class="d-flex  justify-content-around flex-wrap mb-1">
@@ -6,8 +10,14 @@
             <small class="text-muted text-right ml-1 mr-1">{{$offer->location}}</small>
             <small class="text-muted text-right ml-1 mr-1 text-nowrap">{{__('Places')}} : {{$offer->places}}</small>
             @if ($offer->user)
-                <small class="text-muted text-right "> <a href="{{route("users.show",$offer->user)}}"
-                                                          class="enlace ml-1 mr-1">{{$offer->user['center']}}</a></small>
+                @if(Auth::user() && Auth::user()->id==$offer['user_id'])
+                    <small class="text-muted text-right ">{{__('Registers')}} : {{$offer->registereds()->count()}}</small>
+
+                    @else
+
+                    <small class="text-muted text-right "> <a href="{{route("users.show",$offer->user)}}"
+                                                              class="enlace ml-1 mr-1">{{$offer->user['center']}}</a></small>
+                @endif
                 @if($offer->user->ratingsValue()>=0)
 
                     <div class="rating-starts ml-1" title="{{$offer->user->ratingsValue()}}">

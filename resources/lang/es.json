@@ -50,8 +50,8 @@
     "you have not been accepted in any offer": "no le han aceptado en ninguna oferta",
     "you have not registered in any offer": "no se ha registrado en ninguna oferta",
     "There are no recommended offers for you in your area and / or you do not have any type as a favorite":
-        "No hay ofertas recomendadas para ti en tu localidad y/o no tiene ningun tipo como favorito",
-    "Could not find any offer": "No podemos encontrar ninguna oferta",
+        "no hay ofertas recomendadas para ti en tu localidad y/o no tiene ningun tipo como favorito",
+    "Could not find any offer": "no podemos encontrar ninguna oferta",
     "there are no open offers": "no hay ofertas abiertas",
     "there are no closed offers": "no hay ofertas cerradas",
     "there is any rating": "no hay valoraciones",
@@ -122,7 +122,16 @@
     "Updated At:": "Actualizado:",
     "Types": "Tipos",
     "New Type": "Nuevo Tipo",
-    "User not registered.": "Usuario no registrado"
+    "User not registered.": "Usuario no registrado",
+    "Registers": "Registrados",
+    "About us:": "Acerca de:",
+    "Cookies Policies": "Políticas de Cookies",
+    "Privacy Policy": "Políticas de Privacidad",
+    "Legal Notice": "Aviso Legal",
+    "Volunteers?": "¿Voluntariados?",
+    "If you need people willing to face the challenges of participating in a volunteer service or what you are looking for is to become a volunteer, this is your application":
+        "Si necesitas a personas dispuestas a enfrentarse a los retos de particiopar en un voluntariado o lo que buscas es volverte voluntario está es tu aplicación",
+    "Sign up": "Regístrate"
 
 
 

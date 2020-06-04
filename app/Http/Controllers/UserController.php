@@ -207,12 +207,13 @@ class UserController extends Controller
                             'email' => $request['email']
                         ]);
                     }
-
-                    $types=[];
-                    foreach ($request['types'] as $type) {
-                        array_push ($types,$type);
+                    if(isset($request['types'])) {
+                        $types = [];
+                        foreach ($request['types'] as $type) {
+                            array_push($types, $type);
+                        }
+                        $user->preferred()->sync($types);
                     }
-                    $user->preferred()->sync($types);
 
                 } elseif ($user->hasRole('Company')) {
 

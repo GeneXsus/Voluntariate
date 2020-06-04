@@ -4,8 +4,23 @@
 
         <div class="card-header" id="ratingHeader">
             <h5 class="mb-0 d-flex justify-content-center">
-                <button class="btn btn-link buttons-for-colapse">
-                    {{$ratingTitle}}
+                <button class="btn btn-link buttons-for-colapse d-flex flex-wrap justify-content-center">
+                    <span class="mr-1 ">{{$ratingTitle}}</span>
+                    @if($rating_value>=0)
+
+                        <div class="rating-starts ml-1" title="{{$rating_value}}">
+                            @for($i = 1; $i < 6; $i++)
+                                <span class="float-left"><i
+                                        class="text-warning fa {{$i>$rating_value?($i>$rating_value+0.5? 'fa-star-o': 'fa-star-half-o'):'fa-star'}}"></i></span>
+                            @endfor
+
+                        </div>
+                    @else
+                        <div class="rating-starts">
+                            <span class="text-danger"><small>{{__("Not Rated")}}</small></span>
+                        </div>
+
+                    @endif
                 </button>
             </h5>
         </div>

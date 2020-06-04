@@ -111,11 +111,15 @@ class RegisterController extends Controller
                     'password' => Hash::make($data['password']),
                 ]);
                 $user->assignRole('user');
+                if(isset($data['types'])){
                 $types=[];
                 foreach ($data['types'] as $type) {
                     array_push ($types,$type);
                 }
-                $user->preferred()->sync($types);
+
+                    $user->preferred()->sync($types);
+
+                }
                 break;
             case ('company'):
 

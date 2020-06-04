@@ -17,6 +17,4 @@ Broadcast::channel('App.user.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('chat.{chat_id}', function ($user) {
-    return true;
-});
+

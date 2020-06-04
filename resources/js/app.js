@@ -32,6 +32,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('chat-messages', require('./components/ChatMessages.vue').default);
 Vue.component('chat-form', require('./components/ChatForm.vue').default);
 
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY hh:mm')
+    }
+});
 /*const app = new Vue({
     el: '#app',
 

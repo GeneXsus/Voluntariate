@@ -25,7 +25,7 @@ class ChatsController extends Controller
     public function fetchMessages(Request $request)
     {
 
-        return Message::where('chat_id',$request['chat_id'])->with('user')->get();
+        return Message::where('chat_id',$request['chat_id'])->orderBy('updated_at','Desc')->with('user')->get();
     }
 
 
@@ -47,7 +47,7 @@ class ChatsController extends Controller
                 'offer_id'=> $request['offer_id'],
             ]);
 
-            broadcast(new MessageSent($user, $message,$request['chat_id']))->toOthers();
+            event(new MessageSent($user, $message,$request['chat_id']));
 
             return ['status' => 'Message Sent!'];
         }else{

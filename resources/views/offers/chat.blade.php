@@ -19,7 +19,7 @@
 
                 </div>
 
-                @include('layouts.block.rating.show', ['ratings' => $user->ratings()->orderBy('updated_at','Desc')->get(), 'ratingTitle'=>__("Ratings"),"show"=>'show'])
+                @include('layouts.block.rating.show', ['ratings' => $user->ratings()->orderBy('updated_at','Desc')->get(), 'ratingTitle'=>__("Ratings"), 'rating_value'=>$user->ratingsValue()])
 
 
 
