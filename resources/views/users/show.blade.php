@@ -32,7 +32,7 @@
 
                         <div class="row">
                             <div class="col-12 col-sm-10 col-xl-8 offset-sm-1 offset-xl-2">
-                                <p>{ {!! nl2br(e($user->description)) !!}</p>
+                                <p>{!! nl2br(e($user->description)) !!}</p>
                             </div>
                         </div>
 

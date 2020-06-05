@@ -22,7 +22,32 @@
 
 
     <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+        }
+        .loader-content{
+            display: none;
+        }
+        .loader-content p {
+            font-size: 2rem;
+        }
 
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -81,6 +106,11 @@
                 $radio.closest('label').addClass('selected');
             });
 
+            $('.form-loader').submit(function( event ) {
+                $('.form-loader-for-hidden').hide();
+                $('.loader-content').show()
+            });
+
             @if(isset($chat_id) && isset($isSubscribe) && isset($offer) && $isSubscribe && $offer->user)
                 const app = new Vue({
                     el: '#chat-vue',
@@ -101,7 +131,7 @@
                         let channel = pusher.subscribe('chat.{{$chat_id}}');
 
                         channel.bind('MessageSent', (e) => {
-                            console.log(e);
+
                             this.messages.unshift({
                                 created_at: e.message.created_at,
                                 message: e.message.message,

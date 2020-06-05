@@ -56,6 +56,7 @@
     "there are no closed offers": "no hay ofertas cerradas",
     "there is any rating": "no hay valoraciones",
     "there is any users register": "no hay usuarios registrados",
+    "there is any video": "no hay ningun video",
     "New Offer": "Nueva Oferta",
     "Unspecified": "Sin especificar",
     "Name (Spanish)": "Nombre (Español)",
@@ -129,9 +130,14 @@
     "Privacy Policy": "Políticas de Privacidad",
     "Legal Notice": "Aviso Legal",
     "Volunteers?": "¿Voluntariados?",
-    "If you need people willing to face the challenges of participating in a volunteer service or what you are looking for is to become a volunteer, this is your application":
-        "Si necesitas a personas dispuestas a enfrentarse a los retos de particiopar en un voluntariado o lo que buscas es volverte voluntario está es tu aplicación",
-    "Sign up": "Regístrate"
+    "If you need people willing to face the challenges of participating in volunteering or what you are looking for is to become a volunteer, this is your application":
+        "Si necesitas a personas dispuestas a enfrentarse a los retos de participar en un voluntariado o lo que buscas es hacerte voluntario está es tu aplicación",
+    "Sign up": "Regístrate",
+    "Sending...": "Enviando...",
+    "Help for Newcomer": "Ayuda para Nuevos",
+    "Help for User": "Ayuda para Usuarios",
+    "Help for Company": "Ayuda para Compañías",
+    "Need Help?": "¿Necesitas Ayuda?"
 
 
 

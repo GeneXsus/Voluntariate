@@ -75620,7 +75620,7 @@ Vue.component('chat-messages', __webpack_require__(/*! ./components/ChatMessages
 Vue.component('chat-form', __webpack_require__(/*! ./components/ChatForm.vue */ "./resources/js/components/ChatForm.vue")["default"]);
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment(String(value)).format('MM/DD/YYYY hh:mm');
+    return moment(String(value)).format('DD/MM/YYYY hh:mm');
   }
 });
 /*const app = new Vue({

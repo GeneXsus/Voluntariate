@@ -55,7 +55,7 @@
                                 </div>
                                 <div class=" col-6 col-sm-6 col-md-5">
                                     <p class="text-justify"
-                                       title="{{$offer->type->description}}"> {{$offer->type->name}}</p>
+                                       title="{{$offer->type['description']??''}}"> {{$offer->type['name']??__('Unspecified')}}</p>
                                 </div>
                                 <div class=" col-6 col-sm-6 col-md-5  offset-md-1 ">
                                     <p class="ml-auto text-right"> {{__("Places:")}}</p>

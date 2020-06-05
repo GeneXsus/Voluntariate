@@ -56,7 +56,7 @@
                                             <option selected disabled>{{ __('Select Type') }} </option>
                                             @foreach ($types as $type)
                                                 <option title="{{$type['description']}}"
-                                                        value="{{ $type['id'] }}" {{ ((old("type")??$offer->type->id) == $type['id'] ? "selected":"") }}>{{ $type['name'] }}</option>
+                                                        value="{{ $type['id'] }}" {{ ((old("type")??$offer->type->id??0) == $type['id'] ? "selected":"") }}>{{ $type['name'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('type')
@@ -142,7 +142,7 @@
                                             <option selected disabled>{{ __('Select Province') }} </option>
                                             @foreach ($locations as $location)
                                                 <option
-                                                    value="{{ $location['nm'] }}" {{ ((old("type")??$offer->location) == $location['nm'] ? "selected":"") }}>{{ $location['nm'] }}</option>
+                                                    value="{{ $location['nm'] }}" {{ ((old("location")??$offer->location) == $location['nm'] ? "selected":"") }}>{{ $location['nm'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('location')

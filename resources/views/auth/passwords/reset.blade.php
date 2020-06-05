@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                <div class="card-body form-loader-for-hidden">
+                    <form method="POST" class="form-loader" action="{{ route('password.update') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
@@ -58,6 +58,8 @@
                         </div>
                     </form>
                 </div>
+
+                @include('layouts.block.loader', ['message' => __('Sending...')])
             </div>
         </div>
     </div>

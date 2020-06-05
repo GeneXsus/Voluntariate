@@ -7,14 +7,14 @@
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
-                <div class="card-body">
+                <div class="card-body form-loader-for-hidden">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" class="form-loader" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -40,6 +40,7 @@
                         </div>
                     </form>
                 </div>
+                @include('layouts.block.loader', ['message' => __('Sending...')])
             </div>
         </div>
     </div>

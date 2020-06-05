@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="card">
+                <div class="card form-loader-for-hidden">
                     <div class="card-header ">
                         <div class="nav nav-tabs card-header-tabs justify-content-center" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link @if(old('type') !="company")active @endif" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">{{ __('auth.user') }} </a>
@@ -18,7 +18,7 @@
                         <div class="tab-content mt-3">
                             <div class="tab-pane fade @if(old('type') !="company") show active @endif" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
                                 <div class="card-title text-center"> <h1> {{ __('auth.registerUser') }}</h1></div>
-                                <form method="POST" action="{{ route('register') }}">
+                                <form class="form-loader" method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <input id="type-user" type="hidden"
                                            class="form-control" name="type"
@@ -179,7 +179,7 @@
 
                             <div class="tab-pane fade @if(old('type') =="company")show active @endif" id="nav-company" role="tabpanel" aria-labelledby="nav-company-tab">
                                 <div class="card-title text-center"> <h1> {{ __('auth.registerCompany') }} </h1></div>
-                                <form method="POST" action="{{ route('register') }}">
+                                <form class="form-loader" method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <input id="type-company" type="hidden"
                                            class="form-control" name="type"
@@ -314,6 +314,10 @@
                         </div>
                     </div>
                 </div>
+
+                @include('layouts.block.loader', ['message' => __('Sending...')])
+
+            </div>
             </div>
         </div>
     </div>

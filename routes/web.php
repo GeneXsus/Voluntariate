@@ -19,7 +19,7 @@ Auth::routes(['verify' => true]);
 Route::get('privacidad', function (){ return   view('legal.privacidad');})->name('legal.privacidad');
 Route::get('cookies', function (){ return   view('legal.cookies');})->name('legal.cookies');
 Route::get('aviso', function (){ return   view('legal.avisoLegal');})->name('legal.avisoLegal');
-
+Route::get('help', 'HelperController@index')->name('help');
 
 
 
@@ -66,6 +66,7 @@ Route::get('aviso', function (){ return   view('legal.avisoLegal');})->name('leg
 
 
 Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
 
 
 

@@ -153,6 +153,11 @@ class OfferController extends Controller
      */
     public function update(Request $request, Offer $offer)
     {
+        $user = $offer->user;
+        $centerName=$offer['center'];
+        if(isset($user)){
+            $centerName= $user['center'];
+        }
         $this->validateOffer();
         $offer->update([
             'name' => [
@@ -169,6 +174,7 @@ class OfferController extends Controller
             ],
             'location' => $request['location'],
             'places' => $request['places'],
+            'center' => $centerName,
             'init_date' => $request['init_date'],
             'end_date' => $request['end_date'],
             'type_id' => $request['type']
@@ -261,8 +267,8 @@ class OfferController extends Controller
             'location' => 'required',
             'type' => 'required',
             'places' => ['required', 'min:0', 'integer'],
-            'init_date' => ['required', 'date_format:Y-m-d', 'before_or_equal:date_end'],
-            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:end_date']
+            'init_date' => ['required'],
+            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:init_date']
         ]);
 
     }

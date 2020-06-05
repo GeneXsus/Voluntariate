@@ -149,7 +149,15 @@ return [
     'attributes' => [
         'subname'=> 'Apellidos',
         'descriptionEs'=> 'Descripción (Español)',
-        'descriptionEn'=> 'Descripción (Inglés)'
+        'descriptionEn'=> 'Descripción (Inglés)',
+        'descriptionShortEs'=> 'Descripción corta (Español)',
+        'descriptionShortEn'=> 'Descripción  (Inglés)',
+        'nameEs'=> "Nombre (Español)",
+        'nameEn'=> "Nombre (Inglés)",
+        'location'=> "Provincia",
+        'places'=> "Plazas",
+        'init_date'=> "Fecha Inicio",
+        'end_date'=> "Fecha Fin"
     ],
 
 ];
